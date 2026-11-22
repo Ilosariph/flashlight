@@ -60,17 +60,18 @@ class Params:
     spacer_gap: float = 0.15
     key_depth: float = 0.4  # seat flat at +X, only under the spacer
     ring_chamfer: float = 0.4
-    tab_h: float = 3.4  # tab above ring OD (holds the 5 mm ball plunger)
+    tab_h: float = 2.0  # tab above ring OD (holds the 4 mm ball plunger)
     tab_w: float = 5.5  # ring 2: -1.0
-    # detent: Misumi BPK3 ball plunger (M3, L 5, ball Ø2 protrudes 1.0,
-    # stroke 0.5) screwed in from outside, bottoms on a shoulder at plunger_r
+    # detent: generic M3x4 hex-socket ball plunger (AliExpress, 304 stainless,
+    # ball Ø1.5 protrudes 0.5, hex 1.5, 6-10 N) screwed in from outside, bottoms
+    # on a shoulder at plunger_r
     plunger_m: float = 3.0
     plunger_tap: float = 2.5
-    plunger_l: float = 5.0
-    ball_d: float = 2.0
-    ball_out: float = 1.0
-    plunger_r: float = 11.2  # radius of plunger inner end (shoulder)
-    dimple_d: float = 1.5  # ball sits on the edge → sinks ~0.34
+    plunger_l: float = 4.0
+    ball_d: float = 1.5
+    ball_out: float = 0.5
+    plunger_r: float = 10.75  # plunger inner end; detent preload 0.05, land 0.35
+    dimple_d: float = 1.2  # ball sits on the edge → sinks ~0.30
     magnet_d: float = 3.0  # disc, radial: supermagnete S-03-01-N (N48 Ø3×1)
     magnet_t: float = 1.0
     magnet_angle: float = 270.0  # bottom, over the sensors
@@ -339,7 +340,8 @@ def components():
                        P.ring_id / 2 + 0.05 + P.magnet_t, P.magnet_angle, zc)
         mags = m if mags is None else mags.union(m)
         a = math.radians(P.tab_angle)
-        rb = P.seat_d / 2 - 0.34 + P.ball_d / 2
+        sink = P.ball_d / 2 - ((P.ball_d / 2) ** 2 - (P.dimple_d / 2) ** 2) ** 0.5
+        rb = P.seat_d / 2 - sink + P.ball_d / 2
         pl = radial_cyl(P.plunger_m, P.plunger_r, P.plunger_r + P.plunger_l,
                         P.tab_angle, zc)
         plungers = pl if n == 1 else plungers.union(pl)
