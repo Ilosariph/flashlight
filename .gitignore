@@ -1,0 +1,26 @@
+# Nix / direnv
+.direnv/
+result
+result-*
+
+# Python
+.venv/
+__pycache__/
+
+# Firmware build
+firmware/build/
+*.elf
+*.hex
+*.o
+
+# KiCad
+*-backups/
+*.kicad_prl
+~*.lck
+fp-info-cache
+*.kicad_pcb-bak
+*.kicad_sch-bak
+hardware/fab/
+
+# CAD exports regenerated from source
+mech/out/
