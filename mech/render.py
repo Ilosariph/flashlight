@@ -43,10 +43,9 @@ def main():
     parts = fl.all_parts()
     names = list(parts)
     d = export(parts, "full")
-    # section: keep model x >= cut (through SW1 knob); after rotate([0,90,0])
-    # model x → -global z, so the cut face looks up (+Z) in openscad
-    x1, *_ = fl.switch_layout()
-    xcut = (x1[0] + x1[1]) / 2
+    # section: keep model x >= 0 (through tabs, magnets, sensors); after
+    # rotate([0,90,0]) model x → -global z, so the cut face looks up (+Z)
+    xcut = 0.0
     half = fl.box(-50, xcut, -50, 50, -200, 100)
     cut = {}
     for n, s in parts.items():
@@ -72,6 +71,7 @@ def main():
     png(R / "section.scad", R / "tail_section.png", f"{zt},0,0,0,0,0,80",
         (1400, 900))
     png(R / "full.scad", R / "bottom.png", f"{zc},0,0,90,0,0,250")
+    png(R / "full.scad", R / "head.png", f"{zh},0,0,240,0,340,110", (1400, 900))
     print("\n".join(str(p) for p in sorted(R.glob("*.png"))))
 
 

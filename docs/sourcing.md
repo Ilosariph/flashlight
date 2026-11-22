@@ -20,8 +20,8 @@ RS / Farnell: Carclo yes; Chinese parts not checked (unlikely).
 | FS8205A | ✓ EVVO FS8205A — **SOT-23-6**, 20 V 6 A, 27 mΩ | ⚠️ plan says TSSOP-8 → check LCSC C16052 package before layout |
 | TP4057 | ✓ UMW / EVVO, SOT-23-6 | |
 | USB-C 6P power-only | ✓ **TE 2495702-1** (IPX7, CHF 1.32, 6k stock) / GCT USB4125-GF-A (not sealed) | 2495702-1 now in model |
-| SP3T slide SMD (SW1) | ✓ C&K PCM13SMTR, E-Switch EG1312AR / EG1315AA, Nidec CUS-13TB | pick by actuator height (needs ~3.4 mm reach, see mech) |
-| SPDT slide SMD (SW2) | ✓ C&K JS102011SAQN, PCM12SMTR | |
+| TMAG5273 (ring sensors) | ✓ TMAG5273C1QDBVR CHF 1.00, 17k stock; B2 variant CHF 0.95 | slide switches dropped |
+| TMAG5273 breakout (bench) | ✓ Adafruit 6489 CHF 4.93, SparkFun 23880 CHF 6.21 | no fine soldering needed |
 | Q1, Q4, R1, D1, F1, NTC, passives, AO3401A | ✓ standard parts | still to pick (plan §9) |
 | UPDI adapter | ✓ any CP2102/FTDI USB-serial + 4.7 kΩ | |
 | Kapton tape, thermal paste | ✓ | |

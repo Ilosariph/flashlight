@@ -1,15 +1,18 @@
 """DIY 14500 EDC flashlight: parametric concept model (v0).
 
 Coordinates: light points +Z, axis = Z. z = 0 is the LED shelf front face
-(MCPCB seating plane). +Y = top of the light (slide switches), -Y = USB-C side.
+(MCPCB seating plane). +Y = top of the light (ring tabs), -Y = USB-C side,
+ring magnets and Hall sensors.
 
-Housing parts (CNC): head, bezel, body, tailcap.
+Housing parts (CNC): head, bezel (cup, holds optic, retains rings), ring1
+(mode, 3 positions), ring2 (strobe, 2 positions), body, tailcap.
 Reference parts (bought / PCBs): everything in `components()`.
 
 Threads are cosmetic (plain diameters); the thread spec lives in P and goes
 on the JLCCNC drawing. Run `python mech/flashlight.py` → mech/out/.
 """
 
+import math
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -28,16 +31,34 @@ class Params:
     mcpcb_t: float = 1.5
     # --- head
     head_od: float = 23.5
-    bezel_od: float = 21.0  # bezel ring thread M21x0.5 (lathe-cut), optic passes minor ~20.46
+    # bezel cup: screws onto the head stub (M21x0.75), clamps optic, retains rings
+    bezel_od: float = 24.0
     bezel_id: float = 17.6  # lip over optic rim
     bezel_t: float = 2.0
+    optic_gasket: float = 0.5  # thin O-ring / gasket between optic and lip
+    stub_thread: str = "M21x0.75"
+    stub_len: float = 4.0  # thread engagement, also = bezel rear skirt
+    seat_d: float = 21.0  # ring seat on head, = stub thread major
     shelf_t: float = 3.0
+    # --- selector rings (magnet + ball detent in the tab)
+    ring_od: float = 26.0
+    ring_id: float = 21.2
+    ring_w: float = 6.5
+    ring_gap: float = 0.3
+    tab_h: float = 2.0  # tab above ring OD
+    tab_w: float = 4.5
+    ball_d: float = 1.5  # detent ball, M2 set screw + spring behind it in the tab
+    magnet_d: float = 3.0  # N52 disc, radial
+    magnet_t: float = 1.5
+    magnet_angle: float = 270.0  # bottom, over the sensors
+    tab_angle: float = 90.0  # top, under the thumb
+    ring1_pos: tuple = (-40.0, 0.0, 40.0)  # detent angles: low / high / turbo
+    ring2_pos: tuple = (-25.0, 25.0)  # normal / strobe
     cavity_d: float = 18.0  # spine PCB cavity, also driver stop shoulder
     cavity_len: float = 14.0
     driver_d: float = 19.0
     driver_t: float = 1.2
     driver_pocket_d: float = 19.2  # = head thread minor, driver goes in from rear
-    flat_y: float = 10.5  # milled switch deck on head top
     # --- head <-> body joint: M20x0.75, body collar OD 20
     hb_thread: str = "M20x1"
     hb_major: float = 20.0
@@ -57,9 +78,9 @@ class Params:
     tc_seal_len: float = 2.4  # plain section in front of thread, internal O-ring 18x1
     # --- tailcap
     tc_od: float = 21.5
-    ring_d: float = 17.0  # brass retaining ring M17x0.5, BODY contact
-    ring_id: float = 13.0
-    ring_t: float = 1.5
+    tring_d: float = 17.0  # brass tail retaining ring M17x0.5, BODY contact
+    tring_id: float = 13.0
+    tring_t: float = 1.5
     tailpcb_d: float = 16.0
     tailpcb_t: float = 1.0
     # USB-C (TE 2495702-1, IPX7, power only) SMD on the tail PCB rear side,
@@ -75,14 +96,10 @@ class Params:
     clicky_len: float = 10.0
     boot_hole_d: float = 11.0
     tc_end_t: float = 2.0
-    # --- slide switches (placeholders until parts are picked)
-    sw1: tuple = (4.0, 13.0, 3.0)  # w(x), len(z), h(y)  SP3T
-    sw2: tuple = (3.5, 8.5, 3.0)  # SPDT
-    sw_gap: float = 1.0
-    sw_pitch: float = 2.0  # actuator travel per position
-    knob: float = 1.5
-    knob_proud: float = 0.5  # above the flat
+    # --- spine PCB with 2x TMAG5273 (SOT-23-6) on its underside
     spine_t: float = 1.0
+    spine_y: float = -4.0  # top face of spine (chord), sensors hang below
+    sensor: tuple = (2.9, 1.6, 1.1)  # SOT-23-6 l(x), w(z), h(y)
 
 
 P = Params()
@@ -92,7 +109,13 @@ P = Params()
 class Z:
     optic0 = P.mcpcb_t
     optic1 = optic0 + P.optic_h
-    front = optic1 + P.bezel_t  # head front face
+    front = optic1 + P.optic_gasket + P.bezel_t  # bezel front face
+    stub_rear = -P.stub_len  # bezel rear face
+    ring1_front = stub_rear - P.ring_gap
+    ring1_rear = ring1_front - P.ring_w
+    ring2_front = ring1_rear - P.ring_gap
+    ring2_rear = ring2_front - P.ring_w
+    shoulder = ring2_rear - P.ring_gap  # head full OD from here back
     shelf1 = -P.shelf_t
     driver_front = shelf1 - P.cavity_len
     driver_rear = driver_front - P.driver_t  # = body front face
@@ -101,7 +124,7 @@ class Z:
     cell_top = driver_rear - P.head_spring_c
     cell_bot = cell_top - P.cell_len
     tailpcb_front = cell_bot - P.tail_spring_c
-    body_rear = tailpcb_front + P.ring_t  # body end face presses the ring
+    body_rear = tailpcb_front + P.tring_t  # body end face presses the ring
     tailpcb_rear = tailpcb_front - P.tailpcb_t
     bt_thread_front = body_rear + P.bt_thread_len
     tc_front = bt_thread_front + P.tc_seal_len
@@ -120,42 +143,35 @@ def box(x0, x1, y0, y1, z0, z1):
     ).translate((x0, y0, z0))
 
 
-# ------------------------------------------------------- switch placement
-def switch_layout():
-    """x-ranges of SW1/SW2 bodies, y of PCB top, z centre."""
-    w1, w2 = P.sw1[0], P.sw2[0]
-    total = w1 + P.sw_gap + w2
-    x1 = (-total / 2, -total / 2 + w1)
-    x2 = (x1[1] + P.sw_gap, total / 2)
-    # switch top must fit inside the cavity at its outer corners
-    r = P.cavity_d / 2
-    y_top = (r**2 - (total / 2) ** 2) ** 0.5 - 0.3
-    y_base = y_top - P.sw1[2]
-    zc = (Z.shelf1 + Z.driver_front) / 2
-    return x1, x2, y_base, y_top, zc
+# ------------------------------------------------------------- helpers
+def radial_cyl(d, r0, r1, angle, z):
+    """Cylinder of diameter d along the radius at `angle` (deg from +X)."""
+    a = math.radians(angle)
+    u = cq.Vector(math.cos(a), math.sin(a), 0)
+    return cq.Workplane("XY").add(
+        cq.Solid.makeCylinder(d / 2, r1 - r0, u * r0 + cq.Vector(0, 0, z), u))
 
 
-def knob_slot(xr, length, travel, zc):
-    xc = (xr[0] + xr[1]) / 2
-    w = P.knob + 0.3
-    L = P.knob + travel + 0.3
-    return box(xc - w / 2, xc + w / 2, 0, P.head_od, zc - L / 2, zc + L / 2)
+def ring_z(n):
+    return ((Z.ring1_rear, Z.ring1_front) if n == 1
+            else (Z.ring2_rear, Z.ring2_front))
 
 
 # ------------------------------------------------------------- housings
 def head():
-    h = cyl(P.head_od, Z.head_rear, Z.front)
-    h = h.cut(cyl(P.bezel_od, Z.optic1, Z.front + E))
-    h = h.cut(cyl(P.optic_d + P.optic_clear, 0, Z.optic1 + E))
+    h = cyl(P.head_od, Z.head_rear, Z.shoulder).union(
+        cyl(P.seat_d, Z.shoulder - E, 0))  # ring seat + bezel stub (thread)
+    # O-ring 19x1 groove on the stub, seals against the bezel bore
+    h = h.cut(cyl(P.seat_d + 1, -1.4, -0.3).cut(cyl(19.4, -1.5, -0.2)))
     h = h.cut(cyl(P.cavity_d, Z.driver_front, Z.shelf1))
     h = h.cut(cyl(P.driver_pocket_d, Z.hb_thread_end, Z.driver_front + E))
     h = h.cut(cyl(P.hb_relief_d, Z.head_rear - E, Z.hb_thread_end + E))
-    # switch deck: milled flat over the cavity
-    h = h.cut(box(-P.head_od, P.head_od, P.flat_y, P.head_od,
-                  Z.driver_front + 0.5, Z.shelf1 - 0.5))
-    x1, x2, _, _, zc = switch_layout()
-    h = h.cut(knob_slot(x1, P.sw1[1], 2 * P.sw_pitch, zc))
-    h = h.cut(knob_slot(x2, P.sw2[1], P.sw_pitch, zc))
+    # detent dimples in the seat, one per ring position, under the tab ball
+    for n, pos in ((1, P.ring1_pos), (2, P.ring2_pos)):
+        zc = sum(ring_z(n)) / 2
+        for a in pos:
+            h = h.cut(radial_cyl(1.2, P.seat_d / 2 - 0.4, P.seat_d / 2 + E,
+                                 P.tab_angle + a, zc))
     # LED wire holes through shelf, just outside the MCPCB
     for x in (-5.8, 5.8):
         h = h.cut(cq.Workplane("XY").workplane(offset=Z.shelf1 - E)
@@ -164,8 +180,41 @@ def head():
 
 
 def bezel():
-    return cyl(P.bezel_od, Z.optic1, Z.front).cut(
-        cyl(P.bezel_id, Z.optic1 - E, Z.front + E))
+    b = cyl(P.bezel_od, Z.stub_rear, Z.front)
+    b = b.cut(cyl(P.bezel_id, Z.optic1, Z.front + E))  # lip
+    b = b.cut(cyl(P.optic_d + P.optic_clear, 0, Z.optic1 + P.optic_gasket))
+    # internal thread section, bottoms on the stub front face at z = 0
+    return b.cut(cyl(P.seat_d, Z.stub_rear - E, 0 + E))
+
+
+def ring(n):
+    z0, z1 = ring_z(n)
+    zc = (z0 + z1) / 2
+    r = cyl(P.ring_od, z0, z1)
+    # grip flutes around the circumference, skipped near the tab
+    for i in range(16):
+        a = i * 360 / 16
+        if abs((a - P.tab_angle + 180) % 360 - 180) < 30:
+            continue
+        ar = math.radians(a)
+        r = r.cut(cq.Workplane("XY").workplane(offset=z0 - E)
+                  .center((P.ring_od / 2 + 1.0) * math.cos(ar),
+                          (P.ring_od / 2 + 1.0) * math.sin(ar))
+                  .circle(1.5).extrude(P.ring_w + 2 * E))
+    # tab: glove lug, ring 2 narrower so they're told apart by feel
+    tw = P.tab_w if n == 1 else P.tab_w - 1.5
+    tab = (box(-tw / 2, tw / 2, P.ring_od / 2 - 1.0,
+               P.ring_od / 2 + P.tab_h, z0, z1)
+           .edges("|Z").fillet(0.8)
+           .rotate((0, 0, 0), (0, 0, 1), P.tab_angle - 90))
+    r = r.union(tab)
+    r = r.cut(cyl(P.ring_id, z0 - E, z1 + E))
+    # detent: radial hole through the tab (ball + spring + M2 set screw)
+    r = r.cut(radial_cyl(P.ball_d + 0.1, P.ring_id / 2 - E,
+                         P.ring_od / 2 + P.tab_h + E, P.tab_angle, zc))
+    # magnet pocket from the inside
+    return r.cut(radial_cyl(P.magnet_d + 0.05, P.ring_id / 2 - E,
+                            P.ring_id / 2 + P.magnet_t + 0.1, P.magnet_angle, zc))
 
 
 def body():
@@ -186,7 +235,7 @@ def tailcap():
     # internal O-ring groove (18x1) in the plain seal section, Ø19.5 x 1.4
     g0 = Z.bt_thread_front + 0.5
     t = t.cut(cyl(19.5, g0, g0 + 1.4))
-    t = t.cut(cyl(P.ring_d, Z.tailpcb_front, Z.body_rear + E))  # M17x0.5 ring
+    t = t.cut(cyl(P.tring_d, Z.tailpcb_front, Z.body_rear + E))  # M17x0.5 ring
     t = t.cut(cyl(P.tailpcb_d + 0.1, Z.tailpcb_rear, Z.tailpcb_front + E))
     t = t.cut(cyl(P.usb_chamber_d, Z.chamber_rear, Z.tailpcb_rear + E))
     t = t.cut(cyl(P.clicky_d + 0.3, Z.clicky_rear, Z.chamber_rear + E))
@@ -215,26 +264,34 @@ def components():
                   .union(cyl(P.optic_d, Z.optic1 - 2.5, Z.optic1))
                   .cut(cyl(6.0, Z.optic0 - E, Z.optic0 + 4.0)))
     c["driver"] = cyl(P.driver_d, Z.driver_rear, Z.driver_front)
-    x1, x2, yb, yt, zc = switch_layout()
+    yb = P.spine_y - P.spine_t
     pw = 2 * ((P.cavity_d / 2) ** 2 - yb**2) ** 0.5 - 1.0
-    c["spine"] = box(-pw / 2, pw / 2, yb - P.spine_t, yb,
+    c["spine"] = box(-pw / 2, pw / 2, yb, P.spine_y,
                      Z.driver_front, Z.shelf1 - 0.5)
-    knob_top = P.flat_y + P.knob_proud
-    for name, xr, (w, L, hh), pos in (("sw1", x1, P.sw1, -P.sw_pitch),
-                                      ("sw2", x2, P.sw2, -P.sw_pitch / 2)):
-        c[name] = box(xr[0], xr[1], yb, yt, zc - L / 2, zc + L / 2)
-        xc = (xr[0] + xr[1]) / 2
-        kz = zc + pos
-        c[name + "_knob"] = box(xc - P.knob / 2, xc + P.knob / 2, yt, knob_top,
-                                kz - P.knob / 2, kz + P.knob / 2)
+    sl, sw, sh = P.sensor
+    mags = None
+    balls = None
+    for n in (1, 2):
+        zc = sum(ring_z(n)) / 2
+        c[f"hall{n}"] = box(-sl / 2, sl / 2, yb - sh, yb, zc - sw / 2, zc + sw / 2)
+        m = radial_cyl(P.magnet_d, P.ring_id / 2 + 0.05,
+                       P.ring_id / 2 + 0.05 + P.magnet_t, P.magnet_angle, zc)
+        mags = m if mags is None else mags.union(m)
+        a = math.radians(P.tab_angle)
+        rb = P.seat_d / 2 + P.ball_d / 2 - 0.25
+        b = (cq.Workplane("XY").sphere(P.ball_d / 2)
+             .translate((rb * math.cos(a), rb * math.sin(a), zc)))
+        balls = b if balls is None else balls.union(b)
+    c["magnets"] = mags
+    c["balls"] = balls
     c["head_spring"] = cyl(6.0, Z.cell_top, Z.driver_rear).cut(
         cyl(4.8, Z.cell_top - E, Z.driver_rear + E))
     c["cell"] = cyl(P.cell_d, Z.cell_bot, Z.cell_top - 1.0).union(
         cyl(5.0, Z.cell_top - 1.0, Z.cell_top))
     c["tail_spring"] = cyl(8.0, Z.tailpcb_front, Z.cell_bot).cut(
         cyl(6.8, Z.tailpcb_front - E, Z.cell_bot + E))
-    c["tail_ring"] = cyl(P.ring_d, Z.tailpcb_front, Z.body_rear).cut(
-        cyl(P.ring_id, Z.tailpcb_front - E, Z.body_rear + E))
+    c["tail_ring"] = cyl(P.tring_d, Z.tailpcb_front, Z.body_rear).cut(
+        cyl(P.tring_id, Z.tailpcb_front - E, Z.body_rear + E))
     z0, z1 = usb_z()
     c["tail_pcb"] = cyl(P.tailpcb_d, Z.tailpcb_rear, Z.tailpcb_front)
     c["usb_c"] = box(-P.usb_w / 2, P.usb_w / 2, P.usb_flat_y - 0.1,
@@ -244,16 +301,18 @@ def components():
     return c
 
 
-HOUSING = {"head": head, "bezel": bezel, "body": body, "tailcap": tailcap}
+HOUSING = {"head": head, "bezel": bezel, "ring1": lambda: ring(1),
+           "ring2": lambda: ring(2), "body": body, "tailcap": tailcap}
 
 COLORS = {  # rgba, used for STEP assembly and renders
     "head": (0.55, 0.58, 0.62, 1), "bezel": (0.45, 0.47, 0.5, 1),
     "body": (0.62, 0.65, 0.68, 1), "tailcap": (0.55, 0.58, 0.62, 1),
     "mcpcb": (0.85, 0.5, 0.25, 1), "led": (1.0, 0.9, 0.4, 1),
     "optic": (0.8, 0.9, 1.0, 0.45), "driver": (0.1, 0.45, 0.2, 1),
-    "spine": (0.1, 0.45, 0.2, 1), "sw1": (0.15, 0.15, 0.15, 1),
-    "sw2": (0.15, 0.15, 0.15, 1), "sw1_knob": (0.85, 0.35, 0.2, 1),
-    "sw2_knob": (0.85, 0.35, 0.2, 1), "head_spring": (0.8, 0.7, 0.3, 1),
+    "spine": (0.1, 0.45, 0.2, 1), "ring1": (0.75, 0.38, 0.22, 1),
+    "ring2": (0.4, 0.42, 0.46, 1), "hall1": (0.1, 0.1, 0.1, 1),
+    "hall2": (0.1, 0.1, 0.1, 1), "magnets": (0.7, 0.7, 0.75, 1),
+    "balls": (0.9, 0.9, 0.9, 1), "head_spring": (0.8, 0.7, 0.3, 1),
     "cell": (0.2, 0.35, 0.75, 1), "tail_spring": (0.8, 0.7, 0.3, 1),
     "tail_pcb": (0.1, 0.45, 0.2, 1), "tail_ring": (0.8, 0.65, 0.3, 1), "usb_c": (0.75, 0.75, 0.78, 1),
     "clicky": (0.1, 0.1, 0.1, 1), "boot": (0.2, 0.2, 0.2, 1),
@@ -267,17 +326,21 @@ def all_parts():
 
 
 def summary():
-    x1, x2, yb, yt, _ = switch_layout()
+    yb = P.spine_y - P.spine_t - P.sensor[2]
+    gap = (P.ring_id / 2 + 0.05) - abs(yb)
     return "\n".join([
         f"overall length   {Z.front - (Z.tail - 1.5):6.1f} mm  (incl. boot)",
-        f"head  OD {P.head_od}  length {Z.front - Z.head_rear:5.1f} mm",
+        f"head  OD {P.head_od} / rings {P.ring_od} (+tab {P.tab_h})  "
+        f"length incl. bezel {Z.front - Z.head_rear:5.1f} mm",
         f"body  OD {P.body_od}  exposed {Z.head_rear - Z.tc_front:5.1f} mm",
         f"tail  OD {P.tc_od}  length {Z.tc_front - Z.tail:5.1f} mm",
         f"cell space {Z.cell_top - Z.cell_bot:.1f} mm + springs "
         f"(button {P.cell_len}, flat top needs ~1.5 mm extra spring travel)",
-        f"switch bodies y {yb:.2f}..{yt:.2f}, knob protrudes to {P.flat_y + P.knob_proud}",
+        f"sensor face to magnet face {gap:.1f} mm (seat wall "
+        f"{(P.seat_d - P.cavity_d) / 2:.1f} mm), rings z "
+        f"{Z.ring2_rear:.1f}..{Z.ring1_front:.1f}",
         f"threads: head-body {P.hb_thread} x{P.hb_thread_len}, body-tail "
-        f"{P.bt_thread} x{P.bt_thread_len}, bezel M21x0.5, tail ring M17x0.5",
+        f"{P.bt_thread} x{P.bt_thread_len}, bezel {P.stub_thread} x{P.stub_len}, tail ring M17x0.5",
         f"body wall at tail thread root ~{(17.08 - P.bore_d) / 2:.2f} mm, "
         f"tailcap wall at O-ring groove {(P.tc_od - 19.5) / 2:.2f} mm",
     ])

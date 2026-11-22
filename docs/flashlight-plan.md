@@ -7,8 +7,8 @@ Status: concept done, ready for schematic. Last update: 2026-11-22.
 | # | Requirement | Decision |
 |---|---|---|
 | R1 | AA size | 14500 Li-ion (3.7 V). AA NiMH/alkaline not supported |
-| R2 | 3-way slide switch | Low / High / Turbo, absolute position (no mode memory needed) |
-| R3 | 2-way slide switch | Normal / Strobe |
+| R2 | 3-position selector, glove-usable | **Magnetic ring** (ring1): Low / High / Turbo, absolute position, ball detents |
+| R3 | 2-position selector, glove-usable | **Magnetic ring** (ring2, narrower tab): Normal / Strobe |
 | R4 | Tail switch | Mechanical **forward clicky**, true power cutoff, momentary on half-press |
 | R5 | Physical lockout | Unscrew tailcap ~¼–½ turn → body end face lifts off brass tail ring |
 | R6 | USB-C charging, onboard | Port location irrelevant → **in tailcap** (side) |
@@ -59,7 +59,7 @@ How it works:
 ## 3. Firmware spec (head MCU, ATtiny1616)
 
 - Power: MCU only powered while clicky closed. Boot → read slides → light immediately (<50 ms target).
-- Inputs: SW1 SP3T (3 GPIO, internal pull-ups, common to GND), SW2 SPDT (1 GPIO). Pin-change interrupts → **live mode change** while on.
+- Inputs: 2× TMAG5273 3D Hall (I2C, one per ring, different address variants). Poll ~20 Hz → ring angle → position (per-unit calibration table, handles crosstalk between rings + cell can). Sensors powered from a GPIO → 0 drain after LVP. **Live mode change** while on.
 - Output levels (start values, tune on bench):
   - Low ≈ 20–30 mA
   - High ≈ 500 mA
@@ -76,12 +76,15 @@ How it works:
 ## 4. Mechanical
 
 ```
-[optic][LED/MCPCB] [head driver PCB, round] ⊥ [spine PCB: SW1, SW2]   HEAD  ~23.5 mm OD
+[bezel cup: optic][stub|shelf][rings 1+2 over spine PCB w/ 2× TMAG5273][driver]   HEAD 23.5 / rings 26 OD
 [ body tube: 14500 unprotected, button or flat top (49–52 mm)   ]   BODY  ~17–18 mm OD
 [ ring | tail PCB (USB-C flat on rear, IPX7) | clicky ] tailcap      TAIL  OD 21.5, ~26 mm
 ```
 - Overall length estimate ~95–105 mm. Optic = Carclo 20 mm (Ø20, 9.9 mm tall) → head OD ~23.5 mm. Get STEP from carclo-optics.com for CAD.
-- Spine PCB soldered 90° to head driver (castellations/pads), slide actuators through slots in head wall.
+- Spine PCB soldered 90° to head driver (large pads or 1.27 mm pin header — hand-solderable). No wall penetrations: rings act through the 1.5 mm seat wall.
+- Bezel cup (M21×0.75 on head stub, bottoms on stub face, O-ring 19×1) clamps optic and retains both rings on the Ø21 seat; ~0.3 mm axial play per ring.
+- Ring: 6061, OD 26, 16 flutes, tab +2 mm (ring2 tab narrower → tell apart by feel). Detent ball in tab → dimples in seat. Magnet opposite tab.
+- ⚠️ LED shelf now only connects to the head through the 1.5 mm seat wall → weaker heat path in turbo; consider thicker shelf / thermal stepdown earlier.
 - Body = conductor (BODY net). Contact faces (body thread ends, tailcap rim, head contact) **unanodized** — mask or face after anodize. **Bore stays anodized** (insulates cell can from tube). First CNC batch: skip anodize, bead blast only → use kapton sleeve in bore for test.
 - **Cell compatibility:** plan for **button top** (~51–52 mm), flat top (~49–50 mm) must still contact → head spring ≥ 3 mm working travel; tail spring adds margin. Test both on FDM prototype.
 - **Insulated spring pad (head driver):**
@@ -112,8 +115,8 @@ LCSC numbers marked ✓ were found on LCSC; others to verify/pick. Full table al
 | U4 | DW01A | C351410 ✓ | SOT-23-6 | HW backup: overdischarge 2.5 V, overcurrent; VCC = CELL+_P, GND = BODY |
 | Q2 | FS8205A | C16052 ✓ | TSSOP-8 | in LED return path between Rsense and BODY; check rating vs 2.5 A |
 | R7–R8, C5 | 100 Ω, 1 kΩ, 100 nF | TBD | 0402 | DW01A reference circuit |
-| SW1 | SP3T slide K3-1346S-F1 | C128956 ✓ | 13×3.5 mm | alt Alps SSSS213800 C361168 ✓; 13 mm long, check fit |
-| SW2 | SPDT slide MSK12C02 | C431540 ✓ | 8×2.8 mm | normal/strobe |
+| U5, U6 | TMAG5273 3D Hall, I2C (A1 + B1 or other address pair) | TBD (check LCSC) | SOT-23-6 | on spine underside, ~5 mm from ring magnets (~12 mT est.) |
+| R11–R12 | I2C pull-ups 4.7 kΩ | TBD | 0402 | |
 | RT1 | NTC 10 k | TBD | 0402 | optional |
 | C1–C3 | 100 nF | C1525 (verify) | 0402 | decoupling |
 | C4 | 10 µF | C19702 (verify) | 0603 | bulk |
@@ -139,9 +142,14 @@ LCSC numbers marked ✓ were found on LCSC; others to verify/pick. Full table al
 | Springs, brass contact ring | Kaidomain | head spring CELL+, tail spring CELL− |
 | 14500 Li-ion **unprotected, button top** (flat top also fits), ≥ 3 A | battery shop | candidates: Vapcell K10 1000 mAh 8 A, Efest 1200 mAh 6 A. ⚠️ Vapcell H10 from ~mid-2025: bad batches (fast self-discharge) → don't use |
 | Insulating washer, kapton / fish paper | generic | around head spring |
+| 2× N52 disc magnet 3×1.5 mm, axial | supermagnete.ch / DigiKey | epoxy into ring pocket, radial |
+| 2× steel ball 1.5 mm + spring + M2 set screw (stainless, low-magnetic) | Misumi / generic | detent in each ring tab |
 | O-rings, TPU USB plug | printed / generic | |
 | Head / body / tailcap, 6061 | JLCCNC | after FDM fit test |
 | UPDI adapter | USB-serial (CH340/CP2102) + 4.7 kΩ | |
+
+## 5b. Hand assembly (user solders ≥0805 only)
+JLC places every SMD part (incl. TMAG5273, USB-C). By hand: LED wires, head/tail springs, spine↔driver joint, clicky leads, magnets (epoxy), detent balls/set screws.
 
 ## 6. Plan / order of work
 
@@ -175,7 +183,9 @@ LCSC numbers marked ✓ were found on LCSC; others to verify/pick. Full table al
 - [ ] Strobe frequency / level, turbo stepdown thresholds
 - [ ] Q3 needed? (test TP4057 behaviour with BAT shorted first)
 - [x] Threads: head-body **M20×1**, 6 mm; body-tail **M18×0.75**, 5 mm (lockout ¼ turn = 0.19 mm gap, ½ turn for margin); bezel ring **M21×0.5** internal (lathe-cut, non-ISO); tail retaining ring **M17×0.5** brass (= BODY contact). O-rings: head-body 17×1.5 on body collar, body-tail 18×1 internal in tailcap. All single-point on lathe, 6H/6g
-- [ ] Glove-friendly mode selection (SMD slides too small) → magnetic selector ring + Hall sensors?
+- [x] Glove-friendly mode selection → 2 magnetic rings + TMAG5273 (modelled)
+- [ ] Bench-test ring sensing: Adafruit 6489 TMAG5273 breakout + magnet + cell can nearby
+- [ ] Detent force: ball/spring/set screw sizes, dimple depth
 - [x] CAD tool → **CadQuery** (STEP export for JLCCNC; preview via STL → openscad PNG)
 
 ## 10. Suggested repo layout
