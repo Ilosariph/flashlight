@@ -63,8 +63,8 @@ class Params:
     tab_h: float = 2.0  # tab above ring OD
     tab_w: float = 4.5
     ball_d: float = 1.5  # detent ball, M2 set screw + spring behind it in the tab
-    magnet_d: float = 3.0  # N52 disc, radial
-    magnet_t: float = 1.5
+    magnet_d: float = 3.0  # disc, radial: supermagnete S-03-01-N (N48 Ø3×1)
+    magnet_t: float = 1.0
     magnet_angle: float = 270.0  # bottom, over the sensors
     tab_angle: float = 90.0  # top, under the thumb
     ring1_pos: tuple = (-40.0, 0.0, 40.0)  # level detents (turbo / high / low)

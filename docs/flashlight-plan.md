@@ -144,7 +144,7 @@ LCSC numbers marked ✓ were found on LCSC; others to verify/pick. Full table al
 | Springs, brass contact ring | Kaidomain | head spring CELL+, tail spring CELL− |
 | 14500 Li-ion **unprotected, button top** (flat top also fits), ≥ 3 A | battery shop | candidates: Vapcell K10 1000 mAh 8 A, Efest 1200 mAh 6 A. ⚠️ Vapcell H10 from ~mid-2025: bad batches (fast self-discharge) → don't use |
 | Insulating washer, kapton / fish paper | generic | around head spring |
-| 2× N52 disc magnet 3×1.5 mm, axial | supermagnete.ch / DigiKey | epoxy into ring pocket, radial |
+| 2× disc magnet Ø3×1 mm N48, axial (S-03-01-N) | supermagnete.ch | epoxy into ring pocket, radial |
 | 2× steel ball 1.5 mm + spring + M2 set screw (stainless, low-magnetic) | Misumi / generic | detent in each ring tab |
 | O-rings, TPU USB plug | printed / generic | |
 | Head / bezel / 2 rings / body / tailcap, 6061 | JLCCNC | after FDM fit test |

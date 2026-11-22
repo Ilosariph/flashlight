@@ -1,0 +1,7 @@
+Quantity,Digi-Key Part Number,Manufacturer Part Number,Manufacturer,Description,Unit Price CHF,Customer Reference
+1,1528-2955-ND,4226,Adafruit,INA260 current/power monitor breakout (15 A),8.24,measure LED + standby current
+2,1528-2873-ND,4090,Adafruit,USB-C breakout,2.44,charger bench test
+2,36-2461-ND,2461,Keystone,AA 1-cell holder with leads (fits 14500),1.12,bench cell holder
+3,1066-1006-ND,10138,Carclo Technical Plastics,20mm TIR optic frosted narrow,1.94,spare optics
+1,1528-6489-ND,6489,Adafruit,TMAG5273 A1 3D Hall breakout,4.93,spare sensor
+2,1528-4397-ND,4397,Adafruit,STEMMA QT cable 150mm,0.79,spare cables
