@@ -5,7 +5,8 @@ Coordinates: light points +Z, axis = Z. z = 0 is the LED shelf front face
 ring magnets and Hall sensors.
 
 Housing parts (CNC): head, bezel (cup, holds optic, retains rings), ring1
-(mode, 3 positions), ring2 (strobe, 2 positions), body, tailcap.
+(output level L/H/T, rear), ring2 (mode N/S, front), spacer (keyed sheet-metal
+washer between the rings), body, tailcap.
 Reference parts (bought / PCBs): everything in `components()`.
 
 Threads are cosmetic (plain diameters); the thread spec lives in P and goes
@@ -41,16 +42,24 @@ class Params:
     seat_d: float = 21.0  # ring seat on head, = stub thread major
     shelf_t: float = 6.0  # solid LED shelf; grows into cavity space not needed by spine
     ntc_hole: tuple = (1.8, 4.0)  # Ø, depth: leaded bead NTC glued in, behind LED
-    # --- position marks (laser-engraved after anodize; modelled 0.3 deep)
-    mark_h: float = 1.8
-    mark_depth: float = 0.3
-    ring1_marks: tuple = ("L", "H", "T")  # on bezel cup, just in front of ring1
-    ring2_marks: tuple = ("S", "N")  # on head shoulder behind ring2; N left seen from top, beam away
+    # --- position marks, CNC-engraved (0.5 mm cutter: DejaVu Bold 3.2 → stem 0.6)
+    # order follows ring*_pos; +angle offset = left seen from top, beam away
+    mark_h: float = 3.2
+    mark_depth: float = 0.25
+    ring1_marks: tuple = ("T", "H", "L")  # level, on head shoulder behind ring1
+    ring2_marks: tuple = ("S", "N")  # mode, on bezel cup in front of ring2
     # --- selector rings (magnet + ball detent in the tab)
     ring_od: float = 26.0
     ring_id: float = 21.2
     ring_w: float = 6.5
-    ring_gap: float = 0.3
+    ring_gap: float = 0.2  # to bezel / head shoulder
+    # spacer washer between the rings, keyed to a flat on the seat → rings
+    # only rub on a stationary part, never drag each other
+    spacer_t: float = 0.5
+    spacer_od: float = 24.6
+    spacer_gap: float = 0.15
+    key_depth: float = 0.4  # seat flat at +X, only under the spacer
+    ring_chamfer: float = 0.4
     tab_h: float = 2.0  # tab above ring OD
     tab_w: float = 4.5
     ball_d: float = 1.5  # detent ball, M2 set screw + spring behind it in the tab
@@ -58,8 +67,8 @@ class Params:
     magnet_t: float = 1.5
     magnet_angle: float = 270.0  # bottom, over the sensors
     tab_angle: float = 90.0  # top, under the thumb
-    ring1_pos: tuple = (-40.0, 0.0, 40.0)  # detent angles: low / high / turbo
-    ring2_pos: tuple = (-25.0, 25.0)  # normal / strobe
+    ring1_pos: tuple = (-40.0, 0.0, 40.0)  # level detents (turbo / high / low)
+    ring2_pos: tuple = (-25.0, 25.0)  # mode detents (strobe / normal)
     cavity_d: float = 18.0  # spine PCB cavity, also driver stop shoulder
     cavity_len: float = 11.0
     driver_d: float = 19.0
@@ -117,11 +126,13 @@ class Z:
     optic1 = optic0 + P.optic_h
     front = optic1 + P.optic_gasket + P.bezel_t  # bezel front face
     stub_rear = -P.stub_len  # bezel rear face
-    ring1_front = stub_rear - P.ring_gap
-    ring1_rear = ring1_front - P.ring_w
-    ring2_front = ring1_rear - P.ring_gap
+    ring2_front = stub_rear - P.ring_gap  # mode ring, front
     ring2_rear = ring2_front - P.ring_w
-    shoulder = ring2_rear - P.ring_gap  # head full OD from here back
+    spacer_front = ring2_rear - P.spacer_gap
+    spacer_rear = spacer_front - P.spacer_t
+    ring1_front = spacer_rear - P.spacer_gap  # level ring, rear
+    ring1_rear = ring1_front - P.ring_w
+    shoulder = ring1_rear - P.ring_gap  # head full OD from here back
     shelf1 = -P.shelf_t
     driver_front = shelf1 - P.cavity_len
     driver_rear = driver_front - P.driver_t  # = body front face
@@ -190,9 +201,12 @@ def head():
         for a in pos:
             h = h.cut(radial_cyl(1.2, P.seat_d / 2 - 0.4, P.seat_d / 2 + E,
                                  P.tab_angle + a, zc))
-    # ring2 position marks on the shoulder behind it
-    for a, txt in zip(P.ring2_pos, P.ring2_marks):
-        h = engrave(h, txt, P.head_od / 2, P.tab_angle - a, Z.shoulder - 1.6)
+    # level ring (ring1) marks on the shoulder behind it
+    for a, txt in zip(P.ring1_pos, P.ring1_marks):
+        h = engrave(h, txt, P.head_od / 2, P.tab_angle - a, Z.shoulder - 1.8)
+    # key flat for the spacer washer
+    h = h.cut(box(P.seat_d / 2 - P.key_depth, P.seat_d, -P.seat_d, P.seat_d,
+                  Z.spacer_rear - 0.3, Z.spacer_front + 0.3))
     # NTC pocket in the shelf rear face, straight behind the LED
     d, depth = P.ntc_hole
     h = h.cut(cyl(d, Z.shelf1 - E, Z.shelf1 + depth))
@@ -209,16 +223,25 @@ def bezel():
     b = b.cut(cyl(P.optic_d + P.optic_clear, 0, Z.optic1 + P.optic_gasket))
     # internal thread section, bottoms on the stub front face at z = 0
     b = b.cut(cyl(P.seat_d, Z.stub_rear - E, 0 + E))
-    # ring1 position marks, just in front of ring1
-    for a, txt in zip(P.ring1_pos, P.ring1_marks):
-        b = engrave(b, txt, P.bezel_od / 2, P.tab_angle - a, Z.stub_rear + 1.6)
+    # mode ring (ring2) marks, just in front of it
+    for a, txt in zip(P.ring2_pos, P.ring2_marks):
+        b = engrave(b, txt, P.bezel_od / 2, P.tab_angle - a, Z.stub_rear + 1.8)
     return b
+
+
+def spacer():
+    s = cyl(P.spacer_od, Z.spacer_rear, Z.spacer_front).cut(
+        cyl(P.seat_d + 0.1, Z.spacer_rear - E, Z.spacer_front + E))
+    # D-flat matching the seat key (0.1 clearance)
+    return s.union(box(P.seat_d / 2 - P.key_depth + 0.1, P.seat_d / 2 + 0.2,
+                       -4, 4, Z.spacer_rear, Z.spacer_front)
+                   .intersect(cyl(P.seat_d + 0.2, Z.spacer_rear, Z.spacer_front)))
 
 
 def ring(n):
     z0, z1 = ring_z(n)
     zc = (z0 + z1) / 2
-    r = cyl(P.ring_od, z0, z1)
+    r = cyl(P.ring_od, z0, z1).edges("%CIRCLE").chamfer(P.ring_chamfer)
     # grip flutes around the circumference, skipped near the tab
     for i in range(16):
         a = i * 360 / 16
@@ -331,7 +354,8 @@ def components():
 
 
 HOUSING = {"head": head, "bezel": bezel, "ring1": lambda: ring(1),
-           "ring2": lambda: ring(2), "body": body, "tailcap": tailcap}
+           "ring2": lambda: ring(2), "spacer": spacer, "body": body,
+           "tailcap": tailcap}
 
 COLORS = {  # rgba, used for STEP assembly and renders
     "head": (0.55, 0.58, 0.62, 1), "bezel": (0.45, 0.47, 0.5, 1),
@@ -339,7 +363,7 @@ COLORS = {  # rgba, used for STEP assembly and renders
     "mcpcb": (0.85, 0.5, 0.25, 1), "led": (1.0, 0.9, 0.4, 1),
     "optic": (0.8, 0.9, 1.0, 0.45), "driver": (0.1, 0.45, 0.2, 1),
     "spine": (0.1, 0.45, 0.2, 1), "ring1": (0.75, 0.38, 0.22, 1),
-    "ring2": (0.4, 0.42, 0.46, 1), "hall1": (0.1, 0.1, 0.1, 1),
+    "ring2": (0.4, 0.42, 0.46, 1), "spacer": (0.8, 0.8, 0.82, 1), "hall1": (0.1, 0.1, 0.1, 1),
     "hall2": (0.1, 0.1, 0.1, 1), "magnets": (0.7, 0.7, 0.75, 1),
     "balls": (0.9, 0.9, 0.9, 1), "ntc": (0.2, 0.2, 0.6, 1), "head_spring": (0.8, 0.7, 0.3, 1),
     "cell": (0.2, 0.35, 0.75, 1), "tail_spring": (0.8, 0.7, 0.3, 1),
@@ -367,7 +391,7 @@ def summary():
         f"(button {P.cell_len}, flat top needs ~1.5 mm extra spring travel)",
         f"sensor face to magnet face {gap:.1f} mm (seat wall "
         f"{(P.seat_d - P.cavity_d) / 2:.1f} mm), rings z "
-        f"{Z.ring2_rear:.1f}..{Z.ring1_front:.1f}",
+        f"{Z.ring1_rear:.1f}..{Z.ring2_front:.1f}",
         f"threads: head-body {P.hb_thread} x{P.hb_thread_len}, body-tail "
         f"{P.bt_thread} x{P.bt_thread_len}, bezel {P.stub_thread} x{P.stub_len}, tail ring M17x0.5",
         f"body wall at tail thread root ~{(17.08 - P.bore_d) / 2:.2f} mm, "

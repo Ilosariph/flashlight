@@ -7,8 +7,8 @@ Status: concept done, ready for schematic. Last update: 2026-11-22.
 | # | Requirement | Decision |
 |---|---|---|
 | R1 | AA size | 14500 Li-ion (3.7 V). AA NiMH/alkaline not supported |
-| R2 | 3-position selector, glove-usable | **Magnetic ring** (ring1): Low / High / Turbo, absolute position, ball detents |
-| R3 | 2-position selector, glove-usable | **Magnetic ring** (ring2, narrower tab): Normal / Strobe |
+| R2 | 3-position selector, glove-usable | **Magnetic ring, rear** (ring1, wide tab): Low (left) / High / Turbo (right), absolute position, ball detents |
+| R3 | 2-position selector, glove-usable | **Magnetic ring, front** (ring2, narrow tab): Normal (left) / Strobe (right) |
 | R4 | Tail switch | Mechanical **forward clicky**, true power cutoff, momentary on half-press |
 | R5 | Physical lockout | Unscrew tailcap ~¼–½ turn → body end face lifts off brass tail ring |
 | R6 | USB-C charging, onboard | Port location irrelevant → **in tailcap** (side) |
@@ -82,10 +82,11 @@ How it works:
 ```
 - Overall length estimate ~95–105 mm. Optic = Carclo 20 mm (Ø20, 9.9 mm tall) → head OD ~23.5 mm. Get STEP from carclo-optics.com for CAD.
 - Spine PCB soldered 90° to head driver (large pads or 1.27 mm pin header — hand-solderable). No wall penetrations: rings act through the 1.5 mm seat wall.
-- Bezel cup (M21×0.75 on head stub, bottoms on stub face, O-ring 19×1) clamps optic and retains both rings on the Ø21 seat; ~0.3 mm axial play per ring.
+- Bezel cup (M21×0.75 on head stub, bottoms on stub face, O-ring 19×1) clamps optic and retains both rings + spacer on the Ø21 seat.
 - Ring: 6061, OD 26, 16 flutes, tab +2 mm (ring2 tab narrower → tell apart by feel). Detent ball in tab → dimples in seat. Magnet opposite tab.
 - LED shelf 6 mm solid (grew into unused cavity, no length cost, +~2.8 g). Heat path shelf → 1.5 mm seat wall ≈ 0.9 K/W (≈ +2.5 K vs full-wall head at ~5.4 W turbo heat) + stub thread → bezel cup. Acceptable.
-- Position marks laser-engraved after anodize: L/H/T on bezel cup in front of ring1, N/S on head shoulder behind ring2 (1.8 mm DejaVu Bold).
+- Position marks CNC-engraved (0.5 mm cutter, 0.25 deep, DejaVu Bold 3.2 mm → stem 0.6 mm): L/H/T on head shoulder behind level ring, N/S on bezel cup in front of mode ring. Left/right as seen from top with beam pointing away. Same colour after anodize unless paint-filled.
+- Rings separated by a **keyed spacer washer** (0.5 mm, D-flat on a 0.4 mm seat flat) → each ring only rubs on stationary parts, can't drag the other. Ring edges chamfered 0.4 mm. Axial play ~0.35 mm per ring.
 - Body = conductor (BODY net). Contact faces (body thread ends, tailcap rim, head contact) **unanodized** — mask or face after anodize. **Bore stays anodized** (insulates cell can from tube). First CNC batch: skip anodize, bead blast only → use kapton sleeve in bore for test.
 - **Cell compatibility:** plan for **button top** (~51–52 mm), flat top (~49–50 mm) must still contact → head spring ≥ 3 mm working travel; tail spring adds margin. Test both on FDM prototype.
 - **Insulated spring pad (head driver):**
@@ -146,7 +147,8 @@ LCSC numbers marked ✓ were found on LCSC; others to verify/pick. Full table al
 | 2× N52 disc magnet 3×1.5 mm, axial | supermagnete.ch / DigiKey | epoxy into ring pocket, radial |
 | 2× steel ball 1.5 mm + spring + M2 set screw (stainless, low-magnetic) | Misumi / generic | detent in each ring tab |
 | O-rings, TPU USB plug | printed / generic | |
-| Head / body / tailcap, 6061 | JLCCNC | after FDM fit test |
+| Head / bezel / 2 rings / body / tailcap, 6061 | JLCCNC | after FDM fit test |
+| Spacer washer 0.5 mm, D-flat | JLC sheet metal (stainless) or PTFE sheet | between rings |
 | UPDI adapter | USB-serial (CH340/CP2102) + 4.7 kΩ | |
 
 ## 5b. Hand assembly (user solders ≥0805 only)
