@@ -83,7 +83,7 @@ How it works:
 - Overall length estimate ~95–105 mm. Optic = Carclo 20 mm (Ø20, 9.9 mm tall) → head OD ~23.5 mm. Get STEP from carclo-optics.com for CAD.
 - Spine PCB soldered 90° to head driver (large pads or 1.27 mm pin header — hand-solderable). No wall penetrations: rings act through the 1.5 mm seat wall.
 - Bezel cup (M21×0.75 on head stub, bottoms on stub face, O-ring 19×1) clamps optic and retains both rings + spacer on the Ø21 seat.
-- Ring: 6061, OD 26, 16 flutes, tab +2 mm (ring2 tab narrower → tell apart by feel). Detent ball in tab → dimples in seat. Magnet opposite tab.
+- Ring: 6061, OD 26, 16 flutes, tab +3.4 mm, 5.5 wide (ring2 4.5 → tell apart by feel). Detent: Misumi **BPK3** ball plunger (M3, L 5, ball Ø2, stroke 0.5) screwed into the tab, bottoms on a shoulder at r 11.2 → Ø1.5 dimples in seat (ball sinks ~0.34). Magnet opposite tab.
 - LED shelf 6 mm solid (grew into unused cavity, no length cost, +~2.8 g). Heat path shelf → 1.5 mm seat wall ≈ 0.9 K/W (≈ +2.5 K vs full-wall head at ~5.4 W turbo heat) + stub thread → bezel cup. Acceptable.
 - Position marks CNC-engraved (0.5 mm cutter, 0.25 deep, DejaVu Bold 3.2 mm → stem 0.6 mm): L/H/T on head shoulder behind level ring, N/S on bezel cup in front of mode ring. Left/right as seen from top with beam pointing away. Same colour after anodize unless paint-filled.
 - Rings separated by a **keyed spacer washer** (0.5 mm, D-flat on a 0.4 mm seat flat) → each ring only rubs on stationary parts, can't drag the other. Ring edges chamfered 0.4 mm. Axial play ~0.35 mm per ring.
@@ -145,14 +145,14 @@ LCSC numbers marked ✓ were found on LCSC; others to verify/pick. Full table al
 | 14500 Li-ion **unprotected, button top** (flat top also fits), ≥ 3 A | battery shop | candidates: Vapcell K10 1000 mAh 8 A, Efest 1200 mAh 6 A. ⚠️ Vapcell H10 from ~mid-2025: bad batches (fast self-discharge) → don't use |
 | Insulating washer, kapton / fish paper | generic | around head spring |
 | 2× disc magnet Ø3×1 mm N48, axial (S-03-01-N) | supermagnete.ch | epoxy into ring pocket, radial |
-| 2× steel ball 1.5 mm + spring + M2 set screw (stainless, low-magnetic) | Misumi / generic | detent in each ring tab |
+| 2× ball plunger **BPK3** (M3×5, stainless body, ball 1.4125 hardened) | Misumi Europe | detent in each ring tab, Loctite 243 |
 | O-rings, TPU USB plug | printed / generic | |
 | Head / bezel / 2 rings / body / tailcap, 6061 | JLCCNC | after FDM fit test |
 | Spacer washer 0.5 mm, D-flat | JLC sheet metal (stainless) or PTFE sheet | between rings |
 | UPDI adapter | USB-serial (CH340/CP2102) + 4.7 kΩ | |
 
 ## 5b. Hand assembly (user solders ≥0805 only)
-JLC places every SMD part (incl. TMAG5273, USB-C). By hand: LED wires, head/tail springs, spine↔driver joint, clicky leads, magnets (epoxy), detent balls/set screws.
+JLC places every SMD part (incl. TMAG5273, USB-C). By hand: LED wires, head/tail springs, spine↔driver joint, clicky leads, magnets (epoxy), ball plungers.
 
 ## 6. Plan / order of work
 
@@ -188,7 +188,7 @@ JLC places every SMD part (incl. TMAG5273, USB-C). By hand: LED wires, head/tail
 - [x] Threads: head-body **M20×1**, 6 mm; body-tail **M18×0.75**, 5 mm (lockout ¼ turn = 0.19 mm gap, ½ turn for margin); bezel ring **M21×0.5** internal (lathe-cut, non-ISO); tail retaining ring **M17×0.5** brass (= BODY contact). O-rings: head-body 17×1.5 on body collar, body-tail 18×1 internal in tailcap. All single-point on lathe, 6H/6g
 - [x] Glove-friendly mode selection → 2 magnetic rings + TMAG5273 (modelled)
 - [ ] Bench-test ring sensing: Adafruit 6489 TMAG5273 breakout + magnet + cell can nearby
-- [ ] Detent force: ball/spring/set screw sizes, dimple depth
+- [x] Detent: Misumi BPK3, 1.0–2.0 N; ~0.06 mm preload in detent, 0.4 of 0.5 stroke on the land (ring pushed against seat). Shoulder depth ±0.05 critical
 - [x] CAD tool → **CadQuery** (STEP export for JLCCNC; preview via STL → openscad PNG)
 
 ## 10. Suggested repo layout

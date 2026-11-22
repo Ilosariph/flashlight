@@ -60,9 +60,17 @@ class Params:
     spacer_gap: float = 0.15
     key_depth: float = 0.4  # seat flat at +X, only under the spacer
     ring_chamfer: float = 0.4
-    tab_h: float = 2.0  # tab above ring OD
-    tab_w: float = 4.5
-    ball_d: float = 1.5  # detent ball, M2 set screw + spring behind it in the tab
+    tab_h: float = 3.4  # tab above ring OD (holds the 5 mm ball plunger)
+    tab_w: float = 5.5  # ring 2: -1.0
+    # detent: Misumi BPK3 ball plunger (M3, L 5, ball Ø2 protrudes 1.0,
+    # stroke 0.5) screwed in from outside, bottoms on a shoulder at plunger_r
+    plunger_m: float = 3.0
+    plunger_tap: float = 2.5
+    plunger_l: float = 5.0
+    ball_d: float = 2.0
+    ball_out: float = 1.0
+    plunger_r: float = 11.2  # radius of plunger inner end (shoulder)
+    dimple_d: float = 1.5  # ball sits on the edge → sinks ~0.34
     magnet_d: float = 3.0  # disc, radial: supermagnete S-03-01-N (N48 Ø3×1)
     magnet_t: float = 1.0
     magnet_angle: float = 270.0  # bottom, over the sensors
@@ -199,7 +207,7 @@ def head():
     for n, pos in ((1, P.ring1_pos), (2, P.ring2_pos)):
         zc = sum(ring_z(n)) / 2
         for a in pos:
-            h = h.cut(radial_cyl(1.2, P.seat_d / 2 - 0.4, P.seat_d / 2 + E,
+            h = h.cut(radial_cyl(P.dimple_d, P.seat_d / 2 - 0.6, P.seat_d / 2 + E,
                                  P.tab_angle + a, zc))
     # level ring (ring1) marks on the shoulder behind it
     for a, txt in zip(P.ring1_pos, P.ring1_marks):
@@ -253,15 +261,17 @@ def ring(n):
                           (P.ring_od / 2 + 1.0) * math.sin(ar))
                   .circle(1.5).extrude(P.ring_w + 2 * E))
     # tab: glove lug, ring 2 narrower so they're told apart by feel
-    tw = P.tab_w if n == 1 else P.tab_w - 1.5
+    tw = P.tab_w if n == 1 else P.tab_w - 1.0
     tab = (box(-tw / 2, tw / 2, P.ring_od / 2 - 1.0,
                P.ring_od / 2 + P.tab_h, z0, z1)
            .edges("|Z").fillet(0.8)
            .rotate((0, 0, 0), (0, 0, 1), P.tab_angle - 90))
     r = r.union(tab)
     r = r.cut(cyl(P.ring_id, z0 - E, z1 + E))
-    # detent: radial hole through the tab (ball + spring + M2 set screw)
-    r = r.cut(radial_cyl(P.ball_d + 0.1, P.ring_id / 2 - E,
+    # detent: Ø ball+0.2 through to the shoulder, M3 tapped above it
+    r = r.cut(radial_cyl(P.ball_d + 0.2, P.ring_id / 2 - E,
+                         P.plunger_r + E, P.tab_angle, zc))
+    r = r.cut(radial_cyl(P.plunger_tap, P.plunger_r,
                          P.ring_od / 2 + P.tab_h + E, P.tab_angle, zc))
     # magnet pocket from the inside
     return r.cut(radial_cyl(P.magnet_d + 0.05, P.ring_id / 2 - E,
@@ -329,13 +339,17 @@ def components():
                        P.ring_id / 2 + 0.05 + P.magnet_t, P.magnet_angle, zc)
         mags = m if mags is None else mags.union(m)
         a = math.radians(P.tab_angle)
-        rb = P.seat_d / 2 + P.ball_d / 2 - 0.25
+        rb = P.seat_d / 2 - 0.34 + P.ball_d / 2
+        pl = radial_cyl(P.plunger_m, P.plunger_r, P.plunger_r + P.plunger_l,
+                        P.tab_angle, zc)
+        plungers = pl if n == 1 else plungers.union(pl)
         b = (cq.Workplane("XY").sphere(P.ball_d / 2)
              .translate((rb * math.cos(a), rb * math.sin(a), zc)))
         balls = b if balls is None else balls.union(b)
     c["ntc"] = cyl(1.5, Z.shelf1 + P.ntc_hole[1] - 1.6, Z.shelf1 + P.ntc_hole[1] - 0.1)
     c["magnets"] = mags
     c["balls"] = balls
+    c["plungers"] = plungers
     c["head_spring"] = cyl(6.0, Z.cell_top, Z.driver_rear).cut(
         cyl(4.8, Z.cell_top - E, Z.driver_rear + E))
     c["cell"] = cyl(P.cell_d, Z.cell_bot, Z.cell_top - 1.0).union(
@@ -365,7 +379,7 @@ COLORS = {  # rgba, used for STEP assembly and renders
     "spine": (0.1, 0.45, 0.2, 1), "ring1": (0.75, 0.38, 0.22, 1),
     "ring2": (0.4, 0.42, 0.46, 1), "spacer": (0.8, 0.8, 0.82, 1), "hall1": (0.1, 0.1, 0.1, 1),
     "hall2": (0.1, 0.1, 0.1, 1), "magnets": (0.7, 0.7, 0.75, 1),
-    "balls": (0.9, 0.9, 0.9, 1), "ntc": (0.2, 0.2, 0.6, 1), "head_spring": (0.8, 0.7, 0.3, 1),
+    "balls": (0.9, 0.9, 0.9, 1), "plungers": (0.6, 0.6, 0.65, 1), "ntc": (0.2, 0.2, 0.6, 1), "head_spring": (0.8, 0.7, 0.3, 1),
     "cell": (0.2, 0.35, 0.75, 1), "tail_spring": (0.8, 0.7, 0.3, 1),
     "tail_pcb": (0.1, 0.45, 0.2, 1), "tail_ring": (0.8, 0.65, 0.3, 1), "usb_c": (0.75, 0.75, 0.78, 1),
     "clicky": (0.1, 0.1, 0.1, 1), "boot": (0.2, 0.2, 0.2, 1),

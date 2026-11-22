@@ -44,19 +44,13 @@ TP4057, USB4125-GF-A, PCM13SMTR, EG1312AR; mouser.com 10139.
 - Upload via DigiKey *BOM Manager → Upload* or *Cart → Bulk add*, map column "Digi-Key Part Number" + "Quantity".
 - ⚠️ NTC B57540G1103F000: bead diameter not confirmed (pocket in head is Ø1.8, param `ntc_hole`) → check datasheet, enlarge pocket if needed.
 
-## Detent hardware (not at DigiKey)
+## Detent hardware
 
-Per ring: 1 ball Ø1.5, 1 spring (OD ≤1.4, wire ~0.15–0.2, free length ~3 mm), 1 set screw M2×2.
-M2 tap drill = Ø1.6 = ball/spring bore → everything goes in through the threaded hole.
-
-| What | Where | Notes |
-|---|---|---|
-| Set screws, (balls) | **Misumi Europe** | MSSFS M2 stainless; Misumi springs start at OD 2 mm → too big for the Ø1.6 bore |
-| Set screws M2×2 A2/A4 stainless | **Bossard** (CH), Distrelec, Conrad | A2/A4 ≈ non-magnetic |
-| Springs | **Gutekunst Federn** (DE, catalogue, small qty) | stainless 1.4310 is slightly magnetic once cold-worked — OK, sits opposite the magnet |
-| Balls | bearing shops (e.g. kugellager-shop), Misumi | **ceramic (Si3N4/ZrO2) balls** = non-magnetic, hard; 316 steel soft; 440C magnetic |
-| Cheap prototyping | AliExpress assortments (ball 1–3 mm, mini springs, M2 set screws) | good enough for the FDM test rings |
-| Alternative all-in-one | ball spring plungers (Kipp K0314 / Ganter GN 615, M3) | check length vs tab (~4.4 mm radial wall at tab) |
+Misumi Europe **BPK3** ball plunger (short body, M3, L 5, ball Ø2, stroke 0.5,
+load 1.0–2.0 N, hex socket B 1.5), 1 per ring → order 4 (spares). Replaces
+ball + spring + set screw. Ball is EN 1.4125 (440C, magnetic) — sits at the tab,
+opposite the magnet/sensors; check field offset on the bench.
+Loctite 243 on the thread. Set screws no longer needed.
 
 Magnets: supermagnete.ch, N48 disc Ø3 × 1 mm (S-03-01-N), axial magnetisation.
 Optics: Kaidomain sells only its own generic TIRs, not Carclo → Carclo from DigiKey.
