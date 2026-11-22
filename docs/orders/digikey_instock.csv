@@ -1,0 +1,8 @@
+Quantity,Digi-Key Part Number,Manufacturer Part Number,Manufacturer,Description,Unit Price CHF,Customer Reference
+3,1066-1006-ND,10138,Carclo Technical Plastics,20mm TIR optic frosted narrow,1.94,optic
+2,1528-5690-ND,5690,Adafruit,ATtiny1616 breakout (STEMMA QT),4.10,fw dev board
+2,1528-6489-ND,6489,Adafruit,TMAG5273 A1 3D Hall breakout,4.93,ring sensing bench test
+3,1528-4397-ND,4397,Adafruit,STEMMA QT cable 150mm,0.79,I2C cables
+1,1568-15096-ND,15096,SparkFun,Serial Basic CH340 USB-serial,8.94,SerialUPDI programmer
+5,CF14JT4K70CT-ND,CF14JT4K70,Stackpole,4.7k 1/4W axial,0.08,SerialUPDI resistor
+3,495-5054-ND,B57540G1103F000,TDK,NTC 10k 1% glass bead leaded,2.82,LED temp sensor

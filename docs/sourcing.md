@@ -35,3 +35,27 @@ bare 519A LEDs — but bare 519A also not found at DigiKey/Mouser.
 
 Sources: digikey.com product pages for 10138, 10139, 5690, DW01A, FS8205A,
 TP4057, USB4125-GF-A, PCM13SMTR, EG1312AR; mouser.com 10139.
+
+## Order files (checked on digikey.ch 2026-11-22)
+
+- `orders/digikey_instock.csv` — bench/prototype parts, all in stock, ≈ CHF 44 excl. shipping/VAT
+- `orders/digikey_backorder.csv` — Carclo 10139 (0 stock, ~16 wk lead). Order separately or skip.
+- Upload via DigiKey *BOM Manager → Upload* or *Cart → Bulk add*, map column "Digi-Key Part Number" + "Quantity".
+- ⚠️ NTC B57540G1103F000: bead diameter not confirmed (pocket in head is Ø1.8, param `ntc_hole`) → check datasheet, enlarge pocket if needed.
+
+## Detent hardware (not at DigiKey)
+
+Per ring: 1 ball Ø1.5, 1 spring (OD ≤1.4, wire ~0.15–0.2, free length ~3 mm), 1 set screw M2×2.
+M2 tap drill = Ø1.6 = ball/spring bore → everything goes in through the threaded hole.
+
+| What | Where | Notes |
+|---|---|---|
+| All three, one shop | **Misumi Europe** (ships to CH) | balls, configurable mini compression springs, set screws |
+| Set screws M2×2 A2/A4 stainless | **Bossard** (CH), Distrelec, Conrad | A2/A4 ≈ non-magnetic |
+| Springs | **Gutekunst Federn** (DE, catalogue, small qty) | stainless 1.4310 is slightly magnetic once cold-worked — OK, sits opposite the magnet |
+| Balls | bearing shops (e.g. kugellager-shop), Misumi | **ceramic (Si3N4/ZrO2) balls** = non-magnetic, hard; 316 steel soft; 440C magnetic |
+| Cheap prototyping | AliExpress assortments (ball 1–3 mm, mini springs, M2 set screws) | good enough for the FDM test rings |
+| Alternative all-in-one | ball spring plungers (Kipp K0314 / Ganter GN 615, M3) | check length vs tab (~4.4 mm radial wall at tab) |
+
+Magnets: supermagnete.ch, N52 disc Ø3 × 1.5 mm, axial magnetisation.
+Optics: Kaidomain sells only its own generic TIRs, not Carclo → Carclo from DigiKey.
