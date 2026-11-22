@@ -10,7 +10,7 @@ Status: concept done, ready for schematic. Last update: 2026-11-22.
 | R2 | 3-way slide switch | Low / High / Turbo, absolute position (no mode memory needed) |
 | R3 | 2-way slide switch | Normal / Strobe |
 | R4 | Tail switch | Mechanical **forward clicky**, true power cutoff, momentary on half-press |
-| R5 | Physical lockout | Unscrew tailcap ~¼ turn → breaks tailcap-rim ↔ body contact |
+| R5 | Physical lockout | Unscrew tailcap ~¼–½ turn → body end face lifts off brass tail ring |
 | R6 | USB-C charging, onboard | Port location irrelevant → **in tailcap** (side) |
 | R7 | Splash resistance | Nice to have (IPX4-ish): O-rings + TPU plug over USB-C |
 | R8 | Adjustable brightness | Firmware constants, reflash via UPDI; optional EEPROM config gesture later |
@@ -78,7 +78,7 @@ How it works:
 ```
 [optic][LED/MCPCB] [head driver PCB, round] ⊥ [spine PCB: SW1, SW2]   HEAD  ~23.5 mm OD
 [ body tube: 14500 unprotected, button or flat top (49–52 mm)   ]   BODY  ~17–18 mm OD
-[ tail PCB: spring, clicky, TP4057, USB-C side ] tailcap            TAIL  +8–10 mm for USB-C
+[ ring | tail PCB (USB-C flat on rear, IPX7) | clicky ] tailcap      TAIL  OD 21.5, ~26 mm
 ```
 - Overall length estimate ~95–105 mm. Optic = Carclo 20 mm (Ø20, 9.9 mm tall) → head OD ~23.5 mm. Get STEP from carclo-optics.com for CAD.
 - Spine PCB soldered 90° to head driver (castellations/pads), slide actuators through slots in head wall.
@@ -174,7 +174,8 @@ LCSC numbers marked ✓ were found on LCSC; others to verify/pick. Full table al
 - [ ] Q1, Q4, R1, D1, F1, NTC part picks (D1: Vf @ 0.5 A < 0.45 V, IFSM survives F1 trip time)
 - [ ] Strobe frequency / level, turbo stepdown thresholds
 - [ ] Q3 needed? (test TP4057 behaviour with BAT shorted first)
-- [ ] Thread spec for CNC (v0 proposal: M20x0.75 head-body, M18x0.75 body-tail), O-ring sizes
+- [x] Threads: head-body **M20×1**, 6 mm; body-tail **M18×0.75**, 5 mm (lockout ¼ turn = 0.19 mm gap, ½ turn for margin); bezel ring **M21×0.5** internal (lathe-cut, non-ISO); tail retaining ring **M17×0.5** brass (= BODY contact). O-rings: head-body 17×1.5 on body collar, body-tail 18×1 internal in tailcap. All single-point on lathe, 6H/6g
+- [ ] Glove-friendly mode selection (SMD slides too small) → magnetic selector ring + Hall sensors?
 - [x] CAD tool → **CadQuery** (STEP export for JLCCNC; preview via STL → openscad PNG)
 
 ## 10. Suggested repo layout

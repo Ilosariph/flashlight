@@ -28,7 +28,7 @@ class Params:
     mcpcb_t: float = 1.5
     # --- head
     head_od: float = 23.5
-    bezel_od: float = 21.5  # bezel ring thread major (M22x0.5 class)
+    bezel_od: float = 21.0  # bezel ring thread M21x0.5 (lathe-cut), optic passes minor ~20.46
     bezel_id: float = 17.6  # lip over optic rim
     bezel_t: float = 2.0
     shelf_t: float = 3.0
@@ -39,10 +39,10 @@ class Params:
     driver_pocket_d: float = 19.2  # = head thread minor, driver goes in from rear
     flat_y: float = 10.5  # milled switch deck on head top
     # --- head <-> body joint: M20x0.75, body collar OD 20
-    hb_thread: str = "M20x0.75"
+    hb_thread: str = "M20x1"
     hb_major: float = 20.0
-    hb_thread_len: float = 7.0
-    hb_relief_len: float = 3.0  # plain bore behind thread, O-ring seals here
+    hb_thread_len: float = 6.0
+    hb_relief_len: float = 3.0  # plain bore behind thread, O-ring 17x1.5 seals here
     hb_relief_d: float = 20.1
     # --- body / cell
     body_od: float = 18.0
@@ -53,14 +53,24 @@ class Params:
     tail_spring_c: float = 3.0
     # --- body <-> tailcap: M18x0.75 external on body
     bt_thread: str = "M18x0.75"
-    bt_thread_len: float = 7.0
-    tc_seal_len: float = 2.7  # plain section in front of thread, internal O-ring
+    bt_thread_len: float = 5.0
+    tc_seal_len: float = 2.4  # plain section in front of thread, internal O-ring 18x1
     # --- tailcap
-    tc_od: float = 21.0
-    tailpcb_d: float = 17.3
-    tailpcb_t: float = 1.2
-    usb_chamber_d: float = 16.0
-    usb_chamber_len: float = 10.1
+    tc_od: float = 21.5
+    ring_d: float = 17.0  # brass retaining ring M17x0.5, BODY contact
+    ring_id: float = 13.0
+    ring_t: float = 1.5
+    tailpcb_d: float = 16.0
+    tailpcb_t: float = 1.0
+    # USB-C (TE 2495702-1, IPX7, power only) SMD on the tail PCB rear side,
+    # lying flat, port facing -Y, overhangs PCB edge. Dims placeholder until
+    # TE drawing is read.
+    usb_w: float = 9.0
+    usb_h: float = 3.4
+    usb_depth: float = 7.6
+    usb_flat_y: float = -9.9  # milled flat for the plug overmold
+    usb_chamber_d: float = 14.0
+    usb_chamber_len: float = 3.8  # behind PCB, holds connector + charger parts
     clicky_d: float = 12.0
     clicky_len: float = 10.0
     boot_hole_d: float = 11.0
@@ -90,9 +100,10 @@ class Z:
     head_rear = hb_thread_end - P.hb_relief_len
     cell_top = driver_rear - P.head_spring_c
     cell_bot = cell_top - P.cell_len
-    tailpcb_front = cell_bot - P.tail_spring_c  # = body rear face
+    tailpcb_front = cell_bot - P.tail_spring_c
+    body_rear = tailpcb_front + P.ring_t  # body end face presses the ring
     tailpcb_rear = tailpcb_front - P.tailpcb_t
-    bt_thread_front = tailpcb_front + P.bt_thread_len
+    bt_thread_front = body_rear + P.bt_thread_len
     tc_front = bt_thread_front + P.tc_seal_len
     chamber_rear = tailpcb_rear - P.usb_chamber_len
     clicky_rear = chamber_rear - P.clicky_len
@@ -160,29 +171,37 @@ def bezel():
 def body():
     collar = cyl(P.hb_major, Z.head_rear, Z.driver_rear)
     # O-ring groove (ID ~17.6 x 1.0 CS) in the relief section of the collar
-    g0 = Z.head_rear + 0.8
-    collar = collar.cut(cyl(P.hb_major + 1, g0, g0 + 1.2)
-                        .cut(cyl(P.hb_major - 1.6, g0 - E, g0 + 1.2 + E)))
-    tube = cyl(P.body_od, Z.tailpcb_front, Z.head_rear + E)
+    # O-ring 17x1.5 groove: Ø17.8 x 2.0 wide, seals against head relief bore
+    g0 = Z.head_rear + 0.5
+    collar = collar.cut(cyl(P.hb_major + 1, g0, g0 + 2.0)
+                        .cut(cyl(17.8, g0 - E, g0 + 2.0 + E)))
+    tube = cyl(P.body_od, Z.body_rear, Z.head_rear + E)
     return collar.union(tube).cut(
-        cyl(P.bore_d, Z.tailpcb_front - E, Z.driver_rear + E))
+        cyl(P.bore_d, Z.body_rear - E, Z.driver_rear + E))
 
 
 def tailcap():
     t = cyl(P.tc_od, Z.tail, Z.tc_front)
-    t = t.cut(cyl(P.body_od + 0.05, Z.tailpcb_front, Z.tc_front + E))
-    # internal O-ring groove in the plain seal section
-    g0 = Z.bt_thread_front + 0.6
-    t = t.cut(cyl(P.body_od + 1.6, g0, g0 + 1.2))
+    t = t.cut(cyl(P.body_od + 0.05, Z.body_rear, Z.tc_front + E))
+    # internal O-ring groove (18x1) in the plain seal section, Ø19.5 x 1.4
+    g0 = Z.bt_thread_front + 0.5
+    t = t.cut(cyl(19.5, g0, g0 + 1.4))
+    t = t.cut(cyl(P.ring_d, Z.tailpcb_front, Z.body_rear + E))  # M17x0.5 ring
     t = t.cut(cyl(P.tailpcb_d + 0.1, Z.tailpcb_rear, Z.tailpcb_front + E))
     t = t.cut(cyl(P.usb_chamber_d, Z.chamber_rear, Z.tailpcb_rear + E))
     t = t.cut(cyl(P.clicky_d + 0.3, Z.clicky_rear, Z.chamber_rear + E))
     t = t.cut(cyl(P.boot_hole_d, Z.tail - E, Z.clicky_rear + E))
-    # USB-C opening on -Y side, connector long side along Z
-    zc = (Z.chamber_rear + Z.tailpcb_rear) / 2
-    slot = (cq.Workplane("XZ").workplane(offset=0)
-            .center(0, zc).slot2D(9.2, 3.6, angle=90).extrude(P.tc_od))
-    return t.cut(slot)
+    # USB-C: pocket for the connector body + port opening + flat for the plug
+    z0, z1 = usb_z()
+    t = t.cut(box(-P.usb_w / 2 - 0.2, P.usb_w / 2 + 0.2, -P.tc_od, 0,
+                  z0 - 0.2, z1 + 0.2))
+    t = t.cut(box(-P.tc_od, P.tc_od, -P.tc_od, P.usb_flat_y, z0 - 2.5, z1 + 2.5))
+    return t
+
+
+def usb_z():
+    """Connector on the PCB rear face (mid-mount would hit ring/spring)."""
+    return Z.tailpcb_rear - P.usb_h, Z.tailpcb_rear
 
 
 # ----------------------------------------------------------- components
@@ -214,11 +233,12 @@ def components():
         cyl(5.0, Z.cell_top - 1.0, Z.cell_top))
     c["tail_spring"] = cyl(8.0, Z.tailpcb_front, Z.cell_bot).cut(
         cyl(6.8, Z.tailpcb_front - E, Z.cell_bot + E))
+    c["tail_ring"] = cyl(P.ring_d, Z.tailpcb_front, Z.body_rear).cut(
+        cyl(P.ring_id, Z.tailpcb_front - E, Z.body_rear + E))
+    z0, z1 = usb_z()
     c["tail_pcb"] = cyl(P.tailpcb_d, Z.tailpcb_rear, Z.tailpcb_front)
-    zc_usb = (Z.chamber_rear + Z.tailpcb_rear) / 2
-    r_out = P.tc_od / 2 - 0.3
-    c["usb_c"] = box(-1.63, 1.63, -r_out, -r_out + 7.35,
-                     zc_usb - 4.47, zc_usb + 4.47)
+    c["usb_c"] = box(-P.usb_w / 2, P.usb_w / 2, P.usb_flat_y - 0.1,
+                     P.usb_flat_y - 0.1 + P.usb_depth, z0, z1)
     c["clicky"] = cyl(P.clicky_d, Z.clicky_rear, Z.chamber_rear)
     c["boot"] = cyl(P.boot_hole_d - 0.2, Z.tail - 1.5, Z.clicky_rear)
     return c
@@ -235,7 +255,7 @@ COLORS = {  # rgba, used for STEP assembly and renders
     "sw2": (0.15, 0.15, 0.15, 1), "sw1_knob": (0.85, 0.35, 0.2, 1),
     "sw2_knob": (0.85, 0.35, 0.2, 1), "head_spring": (0.8, 0.7, 0.3, 1),
     "cell": (0.2, 0.35, 0.75, 1), "tail_spring": (0.8, 0.7, 0.3, 1),
-    "tail_pcb": (0.1, 0.45, 0.2, 1), "usb_c": (0.75, 0.75, 0.78, 1),
+    "tail_pcb": (0.1, 0.45, 0.2, 1), "tail_ring": (0.8, 0.65, 0.3, 1), "usb_c": (0.75, 0.75, 0.78, 1),
     "clicky": (0.1, 0.1, 0.1, 1), "boot": (0.2, 0.2, 0.2, 1),
 }
 
@@ -256,8 +276,10 @@ def summary():
         f"cell space {Z.cell_top - Z.cell_bot:.1f} mm + springs "
         f"(button {P.cell_len}, flat top needs ~1.5 mm extra spring travel)",
         f"switch bodies y {yb:.2f}..{yt:.2f}, knob protrudes to {P.flat_y + P.knob_proud}",
-        f"threads: head-body {P.hb_thread}, body-tail {P.bt_thread}, "
-        f"body wall at tail thread root ~{(17.2 - P.bore_d) / 2:.2f} mm",
+        f"threads: head-body {P.hb_thread} x{P.hb_thread_len}, body-tail "
+        f"{P.bt_thread} x{P.bt_thread_len}, bezel M21x0.5, tail ring M17x0.5",
+        f"body wall at tail thread root ~{(17.08 - P.bore_d) / 2:.2f} mm, "
+        f"tailcap wall at O-ring groove {(P.tc_od - 19.5) / 2:.2f} mm",
     ])
 
 

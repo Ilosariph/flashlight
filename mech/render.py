@@ -68,6 +68,10 @@ def main():
     png(R / "section.scad", R / "head_section.png", f"{zh},0,0,0,0,0,110",
         (1400, 900))
     png(R / "full.scad", R / "top.png", f"{zc},0,0,270,0,0,250")
+    zt = (fl.Z.tc_front + fl.Z.tail) / 2
+    png(R / "section.scad", R / "tail_section.png", f"{zt},0,0,0,0,0,80",
+        (1400, 900))
+    png(R / "full.scad", R / "bottom.png", f"{zc},0,0,90,0,0,250")
     print("\n".join(str(p) for p in sorted(R.glob("*.png"))))
 
 
