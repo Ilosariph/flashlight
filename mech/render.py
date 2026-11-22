@@ -72,6 +72,7 @@ def main():
         (1400, 900))
     png(R / "full.scad", R / "bottom.png", f"{zc},0,0,90,0,0,250")
     png(R / "full.scad", R / "head.png", f"{zh},0,0,240,0,340,110", (1400, 900))
+    png(R / "full.scad", R / "head_top.png", f"{zh},0,0,270,0,0,70", (1400, 900))
     print("\n".join(str(p) for p in sorted(R.glob("*.png"))))
 
 

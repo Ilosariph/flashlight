@@ -67,7 +67,7 @@ How it works:
 - Strobe (SW2): ~10 Hz, at brightness of SW1 position (tunable).
 - Current control: MCU DAC0 → op-amp (+) ; op-amp (−) ← Rsense top ; op-amp out → Q1 gate.
   - **Open item:** 8-bit DAC resolution too coarse for Low with 0.05 Ω (30 mA = 1.5 mV). Options: PWM-gate the DAC/op-amp reference for Low, or second sense range. Decide during schematic.
-- Thermal: NTC near LED shelf (ADC) or internal temp sensor fallback.
+- Thermal: **leaded bead NTC 10k** glued (thermal epoxy) into Ø1.8×4 mm pocket in shelf rear face, straight behind LED, leads hand-soldered to spine. Backups: TMAG5273 die temp, MCU internal sensor.
 - LVP: measure VDD (internal ref): step down at ~3.3 V, warning blinks, shutdown ~3.0 V.
 - Brightness values as constants in one header; optional later: EEPROM config gesture.
 - Reference code: Anduril 2 (ToyKeeper) — ATtiny1616 hwdefs, thermal regulation, DAC/PWM ramp handling. Own UI is far simpler (slides are absolute state).
@@ -84,7 +84,8 @@ How it works:
 - Spine PCB soldered 90° to head driver (large pads or 1.27 mm pin header — hand-solderable). No wall penetrations: rings act through the 1.5 mm seat wall.
 - Bezel cup (M21×0.75 on head stub, bottoms on stub face, O-ring 19×1) clamps optic and retains both rings on the Ø21 seat; ~0.3 mm axial play per ring.
 - Ring: 6061, OD 26, 16 flutes, tab +2 mm (ring2 tab narrower → tell apart by feel). Detent ball in tab → dimples in seat. Magnet opposite tab.
-- ⚠️ LED shelf now only connects to the head through the 1.5 mm seat wall → weaker heat path in turbo; consider thicker shelf / thermal stepdown earlier.
+- LED shelf 6 mm solid (grew into unused cavity, no length cost, +~2.8 g). Heat path shelf → 1.5 mm seat wall ≈ 0.9 K/W (≈ +2.5 K vs full-wall head at ~5.4 W turbo heat) + stub thread → bezel cup. Acceptable.
+- Position marks laser-engraved after anodize: L/H/T on bezel cup in front of ring1, N/S on head shoulder behind ring2 (1.8 mm DejaVu Bold).
 - Body = conductor (BODY net). Contact faces (body thread ends, tailcap rim, head contact) **unanodized** — mask or face after anodize. **Bore stays anodized** (insulates cell can from tube). First CNC batch: skip anodize, bead blast only → use kapton sleeve in bore for test.
 - **Cell compatibility:** plan for **button top** (~51–52 mm), flat top (~49–50 mm) must still contact → head spring ≥ 3 mm working travel; tail spring adds margin. Test both on FDM prototype.
 - **Insulated spring pad (head driver):**
@@ -117,7 +118,7 @@ LCSC numbers marked ✓ were found on LCSC; others to verify/pick. Full table al
 | R7–R8, C5 | 100 Ω, 1 kΩ, 100 nF | TBD | 0402 | DW01A reference circuit |
 | U5, U6 | TMAG5273 3D Hall, I2C (A1 + B1 or other address pair) | TBD (check LCSC) | SOT-23-6 | on spine underside, ~5 mm from ring magnets (~12 mT est.) |
 | R11–R12 | I2C pull-ups 4.7 kΩ | TBD | 0402 | |
-| RT1 | NTC 10 k | TBD | 0402 | optional |
+| RT1 | NTC 10 k, leaded glass/epoxy bead ≤1.6 mm | TBD (DigiKey) | leaded | in shelf pocket behind LED, hand-soldered |
 | C1–C3 | 100 nF | C1525 (verify) | 0402 | decoupling |
 | C4 | 10 µF | C19702 (verify) | 0603 | bulk |
 | R2–R3 | 10 kΩ | C25744 (verify) | 0402 | gate pulldown, op-amp net |

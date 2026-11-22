@@ -39,7 +39,13 @@ class Params:
     stub_thread: str = "M21x0.75"
     stub_len: float = 4.0  # thread engagement, also = bezel rear skirt
     seat_d: float = 21.0  # ring seat on head, = stub thread major
-    shelf_t: float = 3.0
+    shelf_t: float = 6.0  # solid LED shelf; grows into cavity space not needed by spine
+    ntc_hole: tuple = (1.8, 4.0)  # Ø, depth: leaded bead NTC glued in, behind LED
+    # --- position marks (laser-engraved after anodize; modelled 0.3 deep)
+    mark_h: float = 1.8
+    mark_depth: float = 0.3
+    ring1_marks: tuple = ("L", "H", "T")  # on bezel cup, just in front of ring1
+    ring2_marks: tuple = ("N", "S")  # on head shoulder, just behind ring2
     # --- selector rings (magnet + ball detent in the tab)
     ring_od: float = 26.0
     ring_id: float = 21.2
@@ -55,7 +61,7 @@ class Params:
     ring1_pos: tuple = (-40.0, 0.0, 40.0)  # detent angles: low / high / turbo
     ring2_pos: tuple = (-25.0, 25.0)  # normal / strobe
     cavity_d: float = 18.0  # spine PCB cavity, also driver stop shoulder
-    cavity_len: float = 14.0
+    cavity_len: float = 11.0
     driver_d: float = 19.0
     driver_t: float = 1.2
     driver_pocket_d: float = 19.2  # = head thread minor, driver goes in from rear
@@ -152,6 +158,18 @@ def radial_cyl(d, r0, r1, angle, z):
         cq.Solid.makeCylinder(d / 2, r1 - r0, u * r0 + cq.Vector(0, 0, z), u))
 
 
+def engrave(shape, text, r, angle, z):
+    """Cut `text` into a cylinder surface of radius r; reads with +Z up."""
+    a = math.radians(angle)
+    n = cq.Vector(math.cos(a), math.sin(a), 0)
+    plane = cq.Plane(origin=n * (r + 0.5) + cq.Vector(0, 0, z),
+                     xDir=cq.Vector(-n.y, n.x, 0), normal=n)
+    t = cq.Workplane(plane).text(text, P.mark_h, -(0.5 + P.mark_depth),
+                                 font="DejaVu Sans", kind="bold",
+                                 halign="center", valign="center", combine=False)
+    return shape.cut(t)
+
+
 def ring_z(n):
     return ((Z.ring1_rear, Z.ring1_front) if n == 1
             else (Z.ring2_rear, Z.ring2_front))
@@ -172,6 +190,12 @@ def head():
         for a in pos:
             h = h.cut(radial_cyl(1.2, P.seat_d / 2 - 0.4, P.seat_d / 2 + E,
                                  P.tab_angle + a, zc))
+    # ring2 position marks on the shoulder behind it
+    for a, txt in zip(P.ring2_pos, P.ring2_marks):
+        h = engrave(h, txt, P.head_od / 2, P.tab_angle - a, Z.shoulder - 1.6)
+    # NTC pocket in the shelf rear face, straight behind the LED
+    d, depth = P.ntc_hole
+    h = h.cut(cyl(d, Z.shelf1 - E, Z.shelf1 + depth))
     # LED wire holes through shelf, just outside the MCPCB
     for x in (-5.8, 5.8):
         h = h.cut(cq.Workplane("XY").workplane(offset=Z.shelf1 - E)
@@ -184,7 +208,11 @@ def bezel():
     b = b.cut(cyl(P.bezel_id, Z.optic1, Z.front + E))  # lip
     b = b.cut(cyl(P.optic_d + P.optic_clear, 0, Z.optic1 + P.optic_gasket))
     # internal thread section, bottoms on the stub front face at z = 0
-    return b.cut(cyl(P.seat_d, Z.stub_rear - E, 0 + E))
+    b = b.cut(cyl(P.seat_d, Z.stub_rear - E, 0 + E))
+    # ring1 position marks, just in front of ring1
+    for a, txt in zip(P.ring1_pos, P.ring1_marks):
+        b = engrave(b, txt, P.bezel_od / 2, P.tab_angle - a, Z.stub_rear + 1.6)
+    return b
 
 
 def ring(n):
@@ -282,6 +310,7 @@ def components():
         b = (cq.Workplane("XY").sphere(P.ball_d / 2)
              .translate((rb * math.cos(a), rb * math.sin(a), zc)))
         balls = b if balls is None else balls.union(b)
+    c["ntc"] = cyl(1.5, Z.shelf1 + P.ntc_hole[1] - 1.6, Z.shelf1 + P.ntc_hole[1] - 0.1)
     c["magnets"] = mags
     c["balls"] = balls
     c["head_spring"] = cyl(6.0, Z.cell_top, Z.driver_rear).cut(
@@ -312,7 +341,7 @@ COLORS = {  # rgba, used for STEP assembly and renders
     "spine": (0.1, 0.45, 0.2, 1), "ring1": (0.75, 0.38, 0.22, 1),
     "ring2": (0.4, 0.42, 0.46, 1), "hall1": (0.1, 0.1, 0.1, 1),
     "hall2": (0.1, 0.1, 0.1, 1), "magnets": (0.7, 0.7, 0.75, 1),
-    "balls": (0.9, 0.9, 0.9, 1), "head_spring": (0.8, 0.7, 0.3, 1),
+    "balls": (0.9, 0.9, 0.9, 1), "ntc": (0.2, 0.2, 0.6, 1), "head_spring": (0.8, 0.7, 0.3, 1),
     "cell": (0.2, 0.35, 0.75, 1), "tail_spring": (0.8, 0.7, 0.3, 1),
     "tail_pcb": (0.1, 0.45, 0.2, 1), "tail_ring": (0.8, 0.65, 0.3, 1), "usb_c": (0.75, 0.75, 0.78, 1),
     "clicky": (0.1, 0.1, 0.1, 1), "boot": (0.2, 0.2, 0.2, 1),
