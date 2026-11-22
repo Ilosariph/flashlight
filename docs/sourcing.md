@@ -52,5 +52,13 @@ ball + spring + set screw. Ball is EN 1.4125 (440C, magnetic) — sits at the ta
 opposite the magnet/sensors; check field offset on the bench.
 Loctite 243 on the thread. Set screws no longer needed.
 
+Misumi doesn't sell to private customers. Same short M3×5 hex-socket stainless
+ball plunger (BPK clone) on eBay/AliExpress ("Kugeldruckstück M3x5 Innensechskant
+A2"), e.g. https://www.ebay.de/itm/388668408143 (~EUR 2). Ball Ø, protrusion
+and stroke are not specified → measure, then set `ball_d`, `ball_out`,
+`plunger_l`, `plunger_r` in flashlight.py. Branded M3 parts (Ganter GN 615.3,
+Kipp K0316, Essentra) are 8–9 mm long → tab would be ~6.5 mm tall, no.
+Loctite 243: Galaxus 5 ml CHF 8.30.
+
 Magnets: supermagnete.ch, N48 disc Ø3 × 1 mm (S-03-01-N), axial magnetisation.
 Optics: Kaidomain sells only its own generic TIRs, not Carclo → Carclo from DigiKey.
