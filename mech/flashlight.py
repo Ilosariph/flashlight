@@ -45,7 +45,7 @@ class Params:
     mark_h: float = 1.8
     mark_depth: float = 0.3
     ring1_marks: tuple = ("L", "H", "T")  # on bezel cup, just in front of ring1
-    ring2_marks: tuple = ("N", "S")  # on head shoulder, just behind ring2
+    ring2_marks: tuple = ("S", "N")  # on head shoulder behind ring2; N left seen from top, beam away
     # --- selector rings (magnet + ball detent in the tab)
     ring_od: float = 26.0
     ring_id: float = 21.2
