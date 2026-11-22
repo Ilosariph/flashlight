@@ -76,11 +76,11 @@ How it works:
 ## 4. Mechanical
 
 ```
-[optic][LED/MCPCB] [head driver PCB, round] ⊥ [spine PCB: SW1, SW2]   HEAD  ~21–22 mm OD
+[optic][LED/MCPCB] [head driver PCB, round] ⊥ [spine PCB: SW1, SW2]   HEAD  ~23.5 mm OD
 [ body tube: 14500 unprotected, button or flat top (49–52 mm)   ]   BODY  ~17–18 mm OD
 [ tail PCB: spring, clicky, TP4057, USB-C side ] tailcap            TAIL  +8–10 mm for USB-C
 ```
-- Overall length estimate ~95–105 mm. Pick optic first → defines head OD.
+- Overall length estimate ~95–105 mm. Optic = Carclo 20 mm (Ø20, 9.9 mm tall) → head OD ~23.5 mm. Get STEP from carclo-optics.com for CAD.
 - Spine PCB soldered 90° to head driver (castellations/pads), slide actuators through slots in head wall.
 - Body = conductor (BODY net). Contact faces (body thread ends, tailcap rim, head contact) **unanodized** — mask or face after anodize. **Bore stays anodized** (insulates cell can from tube). First CNC batch: skip anodize, bead blast only → use kapton sleeve in bore for test.
 - **Cell compatibility:** plan for **button top** (~51–52 mm), flat top (~49–50 mm) must still contact → head spring ≥ 3 mm working travel; tail spring adds margin. Test both on FDM prototype.
@@ -133,8 +133,8 @@ LCSC numbers marked ✓ were found on LCSC; others to verify/pick. Full table al
 ### Off-LCSC
 | Part | Source | Notes |
 |---|---|---|
-| Nichia 519A on 10 mm DTP copper MCPCB | Kaidomain / Convoy store | |
-| TIR optic ~17 mm for 3535 | Kaidomain / Carclo / Ledil | defines head OD |
+| Nichia 519A **domed, R9080, 5000K (sm503)** on 10 mm DTP copper MCPCB | Kaidomain / Convoy store | 519A-V1 also OK (~+50 mV Vf). Fallback: Samsung LH351D |
+| TIR optic **Carclo 10138** (20 mm, frosted narrow, ~15°) | LEDSupply / Mouser / DigiKey | alt **10139** (frosted medium, ~24°), same outline → order both, pick on bench. 9.9 mm tall. Head OD ~23.5 mm |
 | Forward clicky 12 mm, ≥ 3 A | Kaidomain (Omten style) | |
 | Springs, brass contact ring | Kaidomain | head spring CELL+, tail spring CELL− |
 | 14500 Li-ion **unprotected, button top** (flat top also fits), ≥ 3 A | battery shop | candidates: Vapcell K10 1000 mAh 8 A, Efest 1200 mAh 6 A. ⚠️ Vapcell H10 from ~mid-2025: bad batches (fast self-discharge) → don't use |
@@ -145,7 +145,7 @@ LCSC numbers marked ✓ were found on LCSC; others to verify/pick. Full table al
 
 ## 6. Plan / order of work
 
-1. **Pick optic + LED** → fix head OD, LED shelf, overall dims.
+1. ~~Pick optic + LED~~ ✓ Carclo 20 mm + 519A 5000K. Next: head CAD (OD, LED shelf, overall dims).
 2. **Schematic** (KiCad): head driver + spine, tail board. Resolve Low-mode current resolution (PWM vs 2nd range). Pick Q1, R1, D1 (check Vf @ 0.5 A < 0.45 V).
 3. **PCB layout**: 4-layer, 0402, panelize head + spine + tail in one JLC order (pay extended-part fees once). Add generous test pads + bench-rig wire pads (CELL+, BODY, CELL−).
 4. **Firmware v0** on dev board / first PCBs: slides, levels, strobe, LVP, thermal.
@@ -169,7 +169,7 @@ LCSC numbers marked ✓ were found on LCSC; others to verify/pick. Full table al
 
 ## 9. Open decisions
 
-- [ ] Optic + exact head OD
+- [x] Optic → Carclo 20 mm (10138 primary, 10139 alt), LED → 519A domed 5000K R9080. Head OD ~23.5 mm
 - [ ] Low-mode current method (PWM-gated reference vs dual sense range)
 - [ ] Q1, Q4, R1, D1, F1, NTC part picks (D1: Vf @ 0.5 A < 0.45 V, IFSM survives F1 trip time)
 - [ ] Strobe frequency / level, turbo stepdown thresholds
