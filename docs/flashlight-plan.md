@@ -145,7 +145,7 @@ LCSC numbers marked ✓ were found on LCSC; others to verify/pick. Full table al
 
 ## 6. Plan / order of work
 
-1. ~~Pick optic + LED~~ ✓ Carclo 20 mm + 519A 5000K. Next: head CAD (OD, LED shelf, overall dims).
+1. ~~Pick optic + LED~~ ✓ Carclo 20 mm + 519A 5000K. Concept CAD v0 in `mech/` (~114 mm long). Sourcing: `docs/sourcing.md` (DigiKey + Kaidomain).
 2. **Schematic** (KiCad): head driver + spine, tail board. Resolve Low-mode current resolution (PWM vs 2nd range). Pick Q1, R1, D1 (check Vf @ 0.5 A < 0.45 V).
 3. **PCB layout**: 4-layer, 0402, panelize head + spine + tail in one JLC order (pay extended-part fees once). Add generous test pads + bench-rig wire pads (CELL+, BODY, CELL−).
 4. **Firmware v0** on dev board / first PCBs: slides, levels, strobe, LVP, thermal.
@@ -174,7 +174,7 @@ LCSC numbers marked ✓ were found on LCSC; others to verify/pick. Full table al
 - [ ] Q1, Q4, R1, D1, F1, NTC part picks (D1: Vf @ 0.5 A < 0.45 V, IFSM survives F1 trip time)
 - [ ] Strobe frequency / level, turbo stepdown thresholds
 - [ ] Q3 needed? (test TP4057 behaviour with BAT shorted first)
-- [ ] Thread spec for CNC (pitch, length), O-ring sizes
+- [ ] Thread spec for CNC (v0 proposal: M20x0.75 head-body, M18x0.75 body-tail), O-ring sizes
 - [x] CAD tool → **CadQuery** (STEP export for JLCCNC; preview via STL → openscad PNG)
 
 ## 10. Suggested repo layout
