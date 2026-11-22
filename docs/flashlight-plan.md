@@ -1,6 +1,6 @@
 # DIY 14500 EDC Flashlight — Project Plan
 
-Status: concept done, ready for schematic. Last update: 2026-11-22.
+Status: schematic v1 generated (hardware/, docs/electronics.md), parts to verify on LCSC. Last update: 2026-11-22.
 
 ## 1. Requirements (what I want)
 
@@ -181,10 +181,10 @@ JLC places every SMD part (incl. TMAG5273, USB-C). By hand: LED wires, head/tail
 ## 9. Open decisions
 
 - [x] Optic → Carclo 20 mm (10138 primary, 10139 alt), LED → 519A domed 5000K R9080. Head OD ~23.5 mm
-- [ ] Low-mode current method (PWM-gated reference vs dual sense range)
+- [x] Low-mode current method → dual sense range, one DAC + KILL pins (docs/electronics.md)
 - [ ] Q1, Q4, R1, D1, F1, NTC part picks (D1: Vf @ 0.5 A < 0.45 V, IFSM survives F1 trip time)
 - [ ] Strobe frequency / level, turbo stepdown thresholds
-- [ ] Q3 needed? (test TP4057 behaviour with BAT shorted first)
+- [x] Q3 dropped (test TP4057 with BAT shorted on the bench). DW01A/FS8205A dropped → BOD 2.6 V + LVP (docs/electronics.md)
 - [x] Threads: head-body **M20×1**, 6 mm; body-tail **M18×0.75**, 5 mm (lockout ¼ turn = 0.19 mm gap, ½ turn for margin); bezel ring **M21×0.5** internal (lathe-cut, non-ISO); tail retaining ring **M17×0.5** brass (= BODY contact). O-rings: head-body 17×1.5 on body collar, body-tail 18×1 internal in tailcap. All single-point on lathe, 6H/6g
 - [x] Glove-friendly mode selection → 2 magnetic rings + TMAG5273 (modelled)
 - [ ] Bench-test ring sensing: Adafruit 6489 TMAG5273 breakout + magnet + cell can nearby

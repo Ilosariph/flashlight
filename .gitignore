@@ -24,3 +24,5 @@ hardware/fab/
 
 # CAD exports regenerated from source
 mech/out/
+hardware/*/erc.rpt
+hardware/__pycache__/
