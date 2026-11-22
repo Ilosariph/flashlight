@@ -12,6 +12,7 @@ DEVLIB = $(AVR_LIBC)/lib/avrxmega3
 CFLAGS  = -mmcu=$(MCU) -DF_CPU=$(F_CPU) -Os -std=gnu11 -Wall -Wextra \
           -ffunction-sections -fdata-sections -Isrc
 LDFLAGS = -mmcu=$(MCU) -B $(DEVLIB) -L $(DEVLIB) -Wl,--gc-sections
+LDLIBS  = -lm
 
 all: $(BUILD)/$(TARGET).hex size
 
@@ -19,7 +20,7 @@ $(BUILD)/%.o: src/%.c | $(BUILD)
 	avr-gcc $(CFLAGS) -c $< -o $@
 
 $(BUILD)/$(TARGET).elf: $(OBJ)
-	avr-gcc $(LDFLAGS) $^ -o $@
+	avr-gcc $(LDFLAGS) $^ $(LDLIBS) -o $@
 
 $(BUILD)/$(TARGET).hex: $(BUILD)/$(TARGET).elf
 	avr-objcopy -O ihex -R .eeprom $< $@
