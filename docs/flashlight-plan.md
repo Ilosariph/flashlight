@@ -83,7 +83,7 @@ How it works:
 - Overall length estimate ~95–105 mm. Optic = Carclo 20 mm (Ø20, 9.9 mm tall) → head OD ~23.5 mm. Get STEP from carclo-optics.com for CAD.
 - Spine PCB soldered 90° to head driver (large pads or 1.27 mm pin header — hand-solderable). No wall penetrations: rings act through the 1.5 mm seat wall.
 - Bezel cup (M21×0.75 on head stub, bottoms on stub face, O-ring 19×1) clamps optic and retains both rings + spacer on the Ø21 seat.
-- Ring: 6061, OD 26, 16 flutes, tab +2 mm, 5.5 wide (ring2 4.5 → tell apart by feel). Detent: generic **M3×4 hex ball plunger** (304, ball Ø1.5, protrudes 0.5, 6–10 N) screwed into the tab, bottoms on a shoulder at r 10.75 → Ø1.2 dimples in seat (ball sinks ~0.30). Magnet opposite tab.
+- Ring: 6061, OD 26, 16 flutes, tab +3 mm (M3×5 plunger; +2 with M3×4), 5.5 wide (ring2 4.5 → tell apart by feel). Detent: generic **M3×5 hex ball plunger** (304, ball Ø1.5, protrudes 0.5, 6–10 N) screwed into the tab, bottoms on a shoulder at r 10.75 → Ø1.2 dimples in seat (ball sinks ~0.30). Magnet opposite tab.
 - LED shelf 6 mm solid (grew into unused cavity, no length cost, +~2.8 g). Heat path shelf → 1.5 mm seat wall ≈ 0.9 K/W (≈ +2.5 K vs full-wall head at ~5.4 W turbo heat) + stub thread → bezel cup. Acceptable.
 - Position marks CNC-engraved (0.5 mm cutter, 0.25 deep, DejaVu Bold 3.2 mm → stem 0.6 mm): L/H/T on head shoulder behind level ring, N/S on bezel cup in front of mode ring. Left/right as seen from top with beam pointing away. Same colour after anodize unless paint-filled.
 - Rings separated by a **keyed spacer washer** (0.5 mm, D-flat on a 0.4 mm seat flat) → each ring only rubs on stationary parts, can't drag the other. Ring edges chamfered 0.4 mm. Axial play ~0.35 mm per ring.
@@ -145,7 +145,7 @@ LCSC numbers marked ✓ were found on LCSC; others to verify/pick. Full table al
 | 14500 Li-ion **unprotected, button top** (flat top also fits), ≥ 3 A | battery shop | candidates: Vapcell K10 1000 mAh 8 A, Efest 1200 mAh 6 A. ⚠️ Vapcell H10 from ~mid-2025: bad batches (fast self-discharge) → don't use |
 | Insulating washer, kapton / fish paper | generic | around head spring |
 | 2× disc magnet Ø3×1 mm N48, axial (S-03-01-N) | supermagnete.ch | epoxy into ring pocket, radial |
-| 2× ball plunger M3×4 hex socket, **304 stainless** (not 12.9: magnetic, rusts) (M3×5 as backup) | AliExpress | detent in each ring tab, Loctite 243 |
+| 2× ball plunger M3×5 hex socket, **304 stainless** (+ M3×4 12.9 steel to compare: lower tab, magnetic, rusts) | AliExpress | detent in each ring tab, Loctite 243 |
 | O-rings, TPU USB plug | printed / generic | |
 | Head / bezel / 2 rings / body / tailcap, 6061 | JLCCNC | after FDM fit test |
 | Spacer washer 0.5 mm, D-flat | JLC sheet metal (stainless) or PTFE sheet | between rings |
@@ -188,7 +188,7 @@ JLC places every SMD part (incl. TMAG5273, USB-C). By hand: LED wires, head/tail
 - [x] Threads: head-body **M20×1**, 6 mm; body-tail **M18×0.75**, 5 mm (lockout ¼ turn = 0.19 mm gap, ½ turn for margin); bezel ring **M21×0.5** internal (lathe-cut, non-ISO); tail retaining ring **M17×0.5** brass (= BODY contact). O-rings: head-body 17×1.5 on body collar, body-tail 18×1 internal in tailcap. All single-point on lathe, 6H/6g
 - [x] Glove-friendly mode selection → 2 magnetic rings + TMAG5273 (modelled)
 - [ ] Bench-test ring sensing: Adafruit 6489 TMAG5273 breakout + magnet + cell can nearby
-- [ ] Detent: generic M3×4 plunger, 6–10 N (seller spec) → ~8–13 N at the tab with Ø1.2 dimples, likely stiff; shallower dimples (Ø0.9) roughly halve it. Preload 0.05 in detent, 0.35 of ~0.5 stroke on land (ring pushed against seat). Shoulder depth ±0.05 critical; first test rings fully threaded to tune depth
+- [ ] Detent: generic M3×5 304 plunger (or M3×4 12.9), 6–10 N (seller spec) → ~8–13 N at the tab with Ø1.2 dimples, likely stiff; shallower dimples (Ø0.9) roughly halve it. Preload 0.05 in detent, 0.35 of ~0.5 stroke on land (ring pushed against seat). Shoulder depth ±0.05 critical; first test rings fully threaded to tune depth
 - [x] CAD tool → **CadQuery** (STEP export for JLCCNC; preview via STL → openscad PNG)
 
 ## 10. Suggested repo layout

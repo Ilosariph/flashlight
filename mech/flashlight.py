@@ -60,14 +60,15 @@ class Params:
     spacer_gap: float = 0.15
     key_depth: float = 0.4  # seat flat at +X, only under the spacer
     ring_chamfer: float = 0.4
-    tab_h: float = 2.0  # tab above ring OD (holds the 4 mm ball plunger)
     tab_w: float = 5.5  # ring 2: -1.0
-    # detent: generic M3x4 hex-socket ball plunger (AliExpress, 304 stainless,
-    # ball Ø1.5 protrudes 0.5, hex 1.5, 6-10 N) screwed in from outside, bottoms
-    # on a shoulder at plunger_r
+    # detent: generic M3 hex-socket ball plunger (AliExpress; M3x5 304 stainless,
+    # M3x4 only in 12.9 steel; ball Ø1.5 protrudes 0.5, hex 1.5, 6-10 N) screwed
+    # in from outside, bottoms on a shoulder at plunger_r. Tab height follows L:
+    # L 5 → tab 3.0, L 4 → tab 2.0
     plunger_m: float = 3.0
     plunger_tap: float = 2.5
-    plunger_l: float = 4.0
+    plunger_l: float = 5.0
+    plunger_recess: float = 0.25  # plunger end below tab top
     ball_d: float = 1.5
     ball_out: float = 0.5
     plunger_r: float = 10.75  # plunger inner end; detent preload 0.05, land 0.35
@@ -124,6 +125,10 @@ class Params:
     spine_t: float = 1.0
     spine_y: float = -4.0  # top face of spine (chord), sensors hang below
     sensor: tuple = (2.9, 1.6, 1.1)  # SOT-23-6 l(x), w(z), h(y)
+
+    @property
+    def tab_h(self):  # tab above ring OD, sized to bury the plunger
+        return self.plunger_r + self.plunger_l + self.plunger_recess - self.ring_od / 2
 
 
 P = Params()

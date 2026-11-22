@@ -52,7 +52,7 @@ ball + spring + set screw. Ball is EN 1.4125 (440C, magnetic) — sits at the ta
 opposite the magnet/sensors; check field offset on the bench.
 Loctite 243 on the thread. Set screws no longer needed.
 
-Misumi doesn't sell to private customers. **Chosen: AliExpress "Federkugelstößel" listing (4.9★, 800+ sold), 304 stainless, M3×4 (+ M3×5 backup), 10 pcs ≈ CHF 1.9**; seller table: ball Ø1.5, protrusion 0.5, hex 1.5, load 6–10 N. Not the 12.9 steel option (magnetic body near the Hall sensors, rusts). Same short M3 hex-socket hex-socket stainless
+Misumi doesn't sell to private customers. **Chosen: AliExpress "Federkugelstößel" listing (4.9★, 800+ sold), M3×5 in 304 stainless (main) + M3×4 in 12.9 steel (only length offered; to compare), 10 pcs each ≈ CHF 1.9**; seller table: ball Ø1.5, protrusion 0.5, hex 1.5, load 6–10 N. 12.9: magnetic (moves with the ring and is far from the sensors → calibrated out, minor) and rusts (black oxide; exposed hex end only). Same short M3 hex-socket hex-socket stainless
 ball plunger (BPK clone) on eBay/AliExpress ("Kugeldruckstück M3x5 Innensechskant
 A2"), e.g. https://www.ebay.de/itm/388668408143 (~EUR 2). Ball Ø, protrusion
 and stroke are not specified → measure, then set `ball_d`, `ball_out`,
