@@ -70,8 +70,20 @@ measuring), optional charge LEDs (DNP).
 
 ## Next
 
-1. ~~LCSC stock check~~ done. Q1/Q4 use DMN3008SFG/SiS415DNT symbols
-   (same SSSG/DDDD pinout) — swap footprint to an AOS DFN3x3 land pattern.
-2. Footprints: TE 2495702-1, clicky, spine joint pads, driver outline Ø19 with
-   spring pad + body ring.
+1. ~~LCSC stock check~~ done.
+2. Footprints (`hardware/gen_footprints.py` → `hardware/flashlight.pretty`):
+   - ✓ `USB_C_TE_2495702-1` from TE drawing sheet 2 (6 SMD pads, 2× Ø0.95
+     NPTH pegs, 4 plated shell slots 0.5×1.1). PCB edge 1.65 mm behind the
+     mating face (TE: 0.10–0.15 gap to the 1.5 mm O-ring). Pad length 1.65
+     scaled from the drawing. Board 1.0–1.2 mm.
+   - ✓ `SpineJoint_1x05_P1.5_Driver` / `_SpineEdge`: 5 pads 0.9×1.6 at 1.5 mm
+     pitch on the spine top face + 2 BODY anchors 2×1.2 under the spine
+     (spine 1.0 mm). Check X mirroring at layout.
+   - ✓ Q1/Q4 on `Package_SON:Diodes_PowerDI3333-8` (AOS DFN 3x3 EP, same
+     SSSG/DDDD pinout; AOS land pattern not found in datasheet → check vs
+     AOS package outline before ordering).
+   - Clicky: waiting for measurements.
+   - Board outlines (driver Ø19 + spring pad + body ring, tail Ø16) → layout.
+   - Mech model still has placeholder USB dims (`usb_w` 9.0 / `usb_depth` 7.6
+     → real 9.94 shell, 10.64 with O-ring, 8.60 deep, 4.61 high, 1.2 below PCB).
 3. PCB layout (driver Ø19, spine strip, tail Ø16).

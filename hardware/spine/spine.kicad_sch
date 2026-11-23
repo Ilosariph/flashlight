@@ -2,7 +2,7 @@
 	(version 20231120)
 	(generator "flashlight_kisch")
 	(generator_version "1.0")
-	(uuid f1e69f2c-26b5-4051-8bab-e846f37a3f4f)
+	(uuid d9324822-7d0c-4f2b-a075-0332be481e7a)
 	(paper "A4")
 	(title_block
 		(title "Flashlight spine (ring sensors)")
@@ -820,7 +820,7 @@
 				(size 2 2)
 				bold)
 			(justify left bottom))
-		(uuid 0125bf64-cda8-4158-82b3-bdba3fc5fadd))
+		(uuid 37272d8a-9afe-4772-900c-bdf6f4a3b82d))
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x05")
 		(at 44.45 48.26 0)
@@ -829,7 +829,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid ee421143-8005-4e58-aa1c-c32566ce9fd5)
+		(uuid a6f07aa6-f6f2-443d-9e75-d708448eba9d)
 		(property "Reference" "J1"
 			(at 44.45 40.64 0)
 			(effects
@@ -840,7 +840,7 @@
 			(effects
 				(font
 					(size 1.27 1.27))))
-		(property "Footprint" "Connector_PinHeader_1.27mm:PinHeader_1x05_P1.27mm_Vertical"
+		(property "Footprint" "flashlight:SpineJoint_1x05_P1.5_SpineEdge"
 			(at 44.45 62.23 0)
 			(effects
 				(font
@@ -853,18 +853,18 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid b205da98-78e3-4d86-a94a-96f224510aa8))
+			(uuid a17fb1a2-92ce-4203-a7f5-1206bb1acbe4))
 		(pin "2"
-			(uuid 469d3afc-fdd3-49cd-9008-fe103949615d))
+			(uuid 287ffa2f-d3d5-4580-8a72-8660db5d4775))
 		(pin "3"
-			(uuid 771b5729-7925-4796-9858-1e1b307a83f0))
+			(uuid d29cbd10-1b84-4510-aa54-13ace768c780))
 		(pin "4"
-			(uuid 5758f84a-9ddd-42bd-9046-ccb2feb76e99))
+			(uuid 936d4459-c556-4e46-921f-9300c9494b68))
 		(pin "5"
-			(uuid 2819f327-6aba-4a5b-aae5-d4c84d736eba))
+			(uuid c594a2c9-ef82-4d57-8ba7-cc90d1984e4f))
 		(instances
 			(project "spine"
-				(path "/f1e69f2c-26b5-4051-8bab-e846f37a3f4f"
+				(path "/d9324822-7d0c-4f2b-a075-0332be481e7a"
 					(reference "J1")
 					(unit 1)))))
 	(label "SENS_PWR"
@@ -874,7 +874,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 4c6b1208-f0a2-44f6-a675-b4b0bdf4df1e))
+		(uuid 5dd10184-116e-40fa-ba7e-00ff4f373481))
 	(label "SDA"
 		(at 39.37 45.72 180)
 		(fields_autoplaced yes)
@@ -882,7 +882,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 16bb3e7d-211f-403f-b868-ab9fb00a37a7))
+		(uuid 81270a9e-9088-4fc4-a52f-2396be3b2ac5))
 	(label "SCL"
 		(at 39.37 48.26 180)
 		(fields_autoplaced yes)
@@ -890,7 +890,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 39b25406-1988-407c-b382-c1d0da7f1fc6))
+		(uuid 0f5bb018-f1d4-457a-a7ab-2acad0c4f251))
 	(label "NTC_SIG"
 		(at 39.37 50.80 180)
 		(fields_autoplaced yes)
@@ -898,7 +898,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 1eabfc93-f765-44d8-b7bc-d8dee15a02c2))
+		(uuid f7fa2935-59e4-4162-96ee-d3df4c827556))
 	(label "BODY"
 		(at 39.37 53.34 180)
 		(fields_autoplaced yes)
@@ -906,7 +906,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid e3fe0d8d-03c7-4a1f-b32e-0bebb20f516e))
+		(uuid b318cb11-ad2a-42d6-a731-406748105559))
 	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 62.23 43.18 0)
@@ -915,7 +915,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 57df108e-2ecd-4d6e-abda-124cef5a338b)
+		(uuid 04ae25a2-4d20-44b3-bc8d-a1f8f6ed0859)
 		(property "Reference" "#FLG01"
 			(at 62.23 40.64 0)
 			(effects
@@ -939,10 +939,10 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid 15680ab0-499f-4fce-bde2-3a5a6f8fd067))
+			(uuid cde85dfb-c2c9-426f-934d-5edade66cc86))
 		(instances
 			(project "spine"
-				(path "/f1e69f2c-26b5-4051-8bab-e846f37a3f4f"
+				(path "/d9324822-7d0c-4f2b-a075-0332be481e7a"
 					(reference "#FLG01")
 					(unit 1)))))
 	(label "SENS_PWR"
@@ -952,7 +952,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 83648864-51c3-408f-be00-d68415b41b93))
+		(uuid 21061012-fdf9-4de8-80f7-256aaf2b8329))
 	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 85.09 43.18 0)
@@ -961,7 +961,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 088a9e99-3932-4fd5-8fe3-689444eeea3c)
+		(uuid f4059d69-54fe-460d-ac86-c1c06821e2ce)
 		(property "Reference" "#FLG02"
 			(at 85.09 40.64 0)
 			(effects
@@ -985,10 +985,10 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid 6a068c46-d84d-4b6f-9f6c-cd106594d398))
+			(uuid 25355dc4-98a0-4a14-bdfc-42584975e718))
 		(instances
 			(project "spine"
-				(path "/f1e69f2c-26b5-4051-8bab-e846f37a3f4f"
+				(path "/d9324822-7d0c-4f2b-a075-0332be481e7a"
 					(reference "#FLG02")
 					(unit 1)))))
 	(label "BODY"
@@ -998,7 +998,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 7531c908-b919-4fba-ad05-76ec591e0b04))
+		(uuid a744bacd-a3e9-4449-9ed4-c4efb38751c0))
 	(symbol
 		(lib_id "Device:C")
 		(at 107.95 46.99 0)
@@ -1007,7 +1007,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 8715f554-1b9a-4fce-a3a6-f25727404544)
+		(uuid 8384b0be-c829-4b92-85a4-bd62bd45dd79)
 		(property "Reference" "C1"
 			(at 107.95 40.64 0)
 			(effects
@@ -1031,12 +1031,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid e1358495-e59d-4ab3-9a27-a45172b259d8))
+			(uuid 6be99e6c-dd32-4f46-8ae5-2546aff4130b))
 		(pin "2"
-			(uuid 772fa52f-70ae-4af9-8f20-b1d5df6e30ed))
+			(uuid 14c059c4-992f-4eee-bb38-870395e93118))
 		(instances
 			(project "spine"
-				(path "/f1e69f2c-26b5-4051-8bab-e846f37a3f4f"
+				(path "/d9324822-7d0c-4f2b-a075-0332be481e7a"
 					(reference "C1")
 					(unit 1)))))
 	(label "SENS_PWR"
@@ -1046,7 +1046,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 1f298b0a-df5d-4b29-b1ac-72b938c0d322))
+		(uuid d2d8419a-e0f8-4657-8fcb-2605712b995f))
 	(label "BODY"
 		(at 107.95 50.80 270)
 		(fields_autoplaced yes)
@@ -1054,7 +1054,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 2e42b740-999d-4ad5-8ac1-b31c8ac7c9a9))
+		(uuid a3701bab-2197-4d17-b15f-b5b0083d7b6e))
 	(symbol
 		(lib_id "Device:R")
 		(at 129.54 46.99 0)
@@ -1063,7 +1063,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 253713b6-ba40-46e9-9738-7285e313f684)
+		(uuid b45ee700-7aa2-4fea-8f77-c0ec600f0e81)
 		(property "Reference" "R1"
 			(at 129.54 40.64 0)
 			(effects
@@ -1087,12 +1087,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid f9f03b5e-f952-4c24-ae83-f089acb621e9))
+			(uuid 6c4e5acb-bcae-4c2d-a67a-b717cb48e0de))
 		(pin "2"
-			(uuid bcfee049-46d9-4595-af88-f53226c75081))
+			(uuid c1f02bc8-cd7d-4745-b311-eee84bcfbaf4))
 		(instances
 			(project "spine"
-				(path "/f1e69f2c-26b5-4051-8bab-e846f37a3f4f"
+				(path "/d9324822-7d0c-4f2b-a075-0332be481e7a"
 					(reference "R1")
 					(unit 1)))))
 	(label "SDA"
@@ -1102,7 +1102,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid e06a33a4-6ffe-43b3-8795-a56a68d7c282))
+		(uuid 7a00090f-e859-4caa-ba22-328f2bcb4747))
 	(label "SENS_PWR"
 		(at 129.54 50.80 270)
 		(fields_autoplaced yes)
@@ -1110,7 +1110,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid fcf3f8bb-fa59-4aa7-a966-9293a3176103))
+		(uuid 1dc5fe24-89b7-4b4d-8981-0d8f174680c9))
 	(symbol
 		(lib_id "Device:R")
 		(at 152.40 46.99 0)
@@ -1119,7 +1119,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid d9c2ef9f-a710-480d-8c09-a89a519d7ea8)
+		(uuid c3f86a6f-de71-47ab-b18c-971871bdb7b2)
 		(property "Reference" "R2"
 			(at 152.40 40.64 0)
 			(effects
@@ -1143,12 +1143,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid cbc06ac6-059e-4a1c-b189-2f7c01998765))
+			(uuid 2b2544df-1e64-45b1-b211-7648b83426aa))
 		(pin "2"
-			(uuid 659975ae-2cc5-417a-8119-c377921be30f))
+			(uuid ea07f3f4-de33-4994-b385-ac951b8e0567))
 		(instances
 			(project "spine"
-				(path "/f1e69f2c-26b5-4051-8bab-e846f37a3f4f"
+				(path "/d9324822-7d0c-4f2b-a075-0332be481e7a"
 					(reference "R2")
 					(unit 1)))))
 	(label "SCL"
@@ -1158,7 +1158,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid ab68e412-386d-4c54-9f69-7dc2e272f56f))
+		(uuid e0a73dc3-8a47-403b-aafb-cecb43bde63f))
 	(label "SENS_PWR"
 		(at 152.40 50.80 270)
 		(fields_autoplaced yes)
@@ -1166,7 +1166,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 97a54d72-a0a6-4038-8195-6c13d2046d67))
+		(uuid 5275280f-7b79-406d-bd18-019c38100e07))
 	(text "Ring sensors: U1 under rear ring (level), U2 under front ring (mode)"
 		(exclude_from_sim no)
 		(at 25.40 75.96 0)
@@ -1175,7 +1175,7 @@
 				(size 2 2)
 				bold)
 			(justify left bottom))
-		(uuid 40915c93-eb3b-49f8-9cc5-9a26ce1e78fc))
+		(uuid 577cb8c1-8530-40f0-8fa3-0bbb68e12038))
 	(symbol
 		(lib_id "Sensor_Magnetic:TMAG5273x1QDBV")
 		(at 44.45 96.52 0)
@@ -1184,7 +1184,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 3b38af47-1d92-4cdc-87ac-e273e17516a9)
+		(uuid 6b7e7f18-37d0-4098-bf3b-949d88f2aca4)
 		(property "Reference" "U1"
 			(at 44.45 86.36 0)
 			(effects
@@ -1220,20 +1220,20 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid b55d4a01-2d2c-441e-a935-16e490b1b786))
+			(uuid ac31c84c-062e-4c88-988e-a36f9f27342e))
 		(pin "2"
-			(uuid 372ef543-e5a0-4384-ac3a-0bd127c69899))
+			(uuid c0a1bdf6-4127-444b-aca4-32997e47e2ac))
 		(pin "3"
-			(uuid f9193a10-5bdf-4d02-b02c-92448047e9df))
+			(uuid 8f150381-fce3-4cd8-8df2-9ed70c9f606e))
 		(pin "4"
-			(uuid cbdc928d-8cfe-4946-9e5c-5b32ebbe95d7))
+			(uuid 3c1d12a7-71d2-43ef-987f-cf5b0ac5c163))
 		(pin "5"
-			(uuid 79907165-63f3-4534-bed5-58087ee5f5cb))
+			(uuid 31e7925c-8bb6-4a7c-ad29-1d6614cc27fa))
 		(pin "6"
-			(uuid 79002183-0dff-444f-8aa8-ca53cb925f2b))
+			(uuid c2dc9907-c938-4477-a7d3-c234a633972e))
 		(instances
 			(project "spine"
-				(path "/f1e69f2c-26b5-4051-8bab-e846f37a3f4f"
+				(path "/d9324822-7d0c-4f2b-a075-0332be481e7a"
 					(reference "U1")
 					(unit 1)))))
 	(label "SCL"
@@ -1243,7 +1243,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 93e50328-de1d-479c-8c75-e6fd6f02c371))
+		(uuid 1a166985-db09-42e1-8f41-891b18365426))
 	(label "BODY"
 		(at 44.45 104.14 270)
 		(fields_autoplaced yes)
@@ -1251,7 +1251,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid d32403c3-f1d5-4bf4-911d-2bfd0248e09c))
+		(uuid d9f4d4b0-7df5-4413-99f7-2e273e43afd9))
 	(label "BODY"
 		(at 46.99 104.14 270)
 		(fields_autoplaced yes)
@@ -1259,7 +1259,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 053a8031-6652-4005-ad89-48a6d0ddc280))
+		(uuid 2be5f67d-0f2d-449a-8ebe-8327927f8f53))
 	(label "SENS_PWR"
 		(at 44.45 88.90 90)
 		(fields_autoplaced yes)
@@ -1267,10 +1267,10 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 6ddabdd2-311e-4bbe-9715-0226c237698b))
+		(uuid 80f486ea-900f-4801-a5b8-18deb6b457c5))
 	(no_connect
 		(at 54.61 93.98)
-		(uuid 8e6dc058-a564-4a81-bb81-1dfbb7df56b5))
+		(uuid 36e56812-504d-4ee2-b7fd-c0cdc6d2fa36))
 	(label "SDA"
 		(at 34.29 96.52 180)
 		(fields_autoplaced yes)
@@ -1278,7 +1278,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 45e9438b-9eb0-4e09-843a-0e40d4716795))
+		(uuid 0f967d3e-19f3-4a3e-a200-cf5d72e16159))
 	(symbol
 		(lib_id "Device:C")
 		(at 76.20 92.71 0)
@@ -1287,7 +1287,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid a6f26885-498d-4710-aea4-e6811b8d8673)
+		(uuid 81b53d8a-1665-418a-b4d8-77249292f84c)
 		(property "Reference" "C2"
 			(at 76.20 86.36 0)
 			(effects
@@ -1311,12 +1311,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid f652e209-c475-47f6-807c-b6a31520d583))
+			(uuid c8f57b1f-5575-4722-afde-16ce592330b1))
 		(pin "2"
-			(uuid c365b663-a8ba-4411-9213-a067272e5bd9))
+			(uuid 40723f09-495d-42d4-8c16-dd92e43fba8c))
 		(instances
 			(project "spine"
-				(path "/f1e69f2c-26b5-4051-8bab-e846f37a3f4f"
+				(path "/d9324822-7d0c-4f2b-a075-0332be481e7a"
 					(reference "C2")
 					(unit 1)))))
 	(label "SENS_PWR"
@@ -1326,7 +1326,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 9abd8a3a-9327-4c4b-9140-9622c1dc1772))
+		(uuid 58c8118a-eda4-4811-a1a4-1c2e891ccd66))
 	(label "BODY"
 		(at 76.20 96.52 270)
 		(fields_autoplaced yes)
@@ -1334,7 +1334,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 0e7a483c-eb4e-49d0-a751-41c367fa6a71))
+		(uuid 031a67e5-57c8-48dc-9d2c-29c18b388417))
 	(symbol
 		(lib_id "Sensor_Magnetic:TMAG5273x1QDBV")
 		(at 113.03 96.52 0)
@@ -1343,7 +1343,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid ee6dcdb6-1d1e-452b-9d39-9db76cbb5088)
+		(uuid f2df7bdf-a9f9-43c5-9346-d7107d6312ae)
 		(property "Reference" "U2"
 			(at 113.03 86.36 0)
 			(effects
@@ -1379,20 +1379,20 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid fc3b1bc0-a5d9-4d4b-93cd-3c7cdd350e1c))
+			(uuid 65026ac8-d405-4faf-8624-c8afb6e9ba18))
 		(pin "2"
-			(uuid c792c276-4f5e-430d-9235-9e750de97a6b))
+			(uuid 7adc432d-67cc-460e-8065-c53248bd7e7b))
 		(pin "3"
-			(uuid 14911e54-b574-4eaa-97b7-55e260adbb73))
+			(uuid a9c7748d-db75-473c-92ac-618226e4233b))
 		(pin "4"
-			(uuid 03f5f1e1-7827-4598-9c3f-5c22560dad13))
+			(uuid 12ca0f01-6938-4f5d-997c-0aee9ddef7d8))
 		(pin "5"
-			(uuid c74b075c-957e-49c7-b6bb-2ab001bec003))
+			(uuid 05ad85d8-ff06-4413-8644-5321fc6d9339))
 		(pin "6"
-			(uuid caf197c7-5ac9-4c6a-a0ab-97ac3fa6ec75))
+			(uuid a76b8d69-766a-47a8-b502-f6c153b4475c))
 		(instances
 			(project "spine"
-				(path "/f1e69f2c-26b5-4051-8bab-e846f37a3f4f"
+				(path "/d9324822-7d0c-4f2b-a075-0332be481e7a"
 					(reference "U2")
 					(unit 1)))))
 	(label "SCL"
@@ -1402,7 +1402,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 8f94fe32-3266-403d-a098-087b85d4e1c3))
+		(uuid 33cf3a74-a801-4630-bcbb-83f43b368795))
 	(label "BODY"
 		(at 113.03 104.14 270)
 		(fields_autoplaced yes)
@@ -1410,7 +1410,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 06d3b806-2243-4d68-931f-d9e97baba47b))
+		(uuid 45ccf601-892f-4e18-b123-12ef78609b43))
 	(label "BODY"
 		(at 115.57 104.14 270)
 		(fields_autoplaced yes)
@@ -1418,7 +1418,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid ad30e04f-1d23-4a47-ad2a-4665cd03c07b))
+		(uuid d86eb146-0d11-45ed-a9f1-f4dae8b0008d))
 	(label "SENS_PWR"
 		(at 113.03 88.90 90)
 		(fields_autoplaced yes)
@@ -1426,10 +1426,10 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 6dc8a670-f0d3-4668-a4bb-641a3f584a9e))
+		(uuid 2e89fd31-17b6-4126-a4f3-12d698cc0e43))
 	(no_connect
 		(at 123.19 93.98)
-		(uuid 5642b258-afbc-40b3-bd61-84f76f411f12))
+		(uuid c1f2c5a3-5e49-44aa-a6e1-7e96fa5b15bd))
 	(label "SDA"
 		(at 102.87 96.52 180)
 		(fields_autoplaced yes)
@@ -1437,7 +1437,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid c7e00e09-4f5e-4f02-b2c6-aab665239328))
+		(uuid 5178ef29-236e-41e6-88c2-9163880beb8c))
 	(symbol
 		(lib_id "Device:C")
 		(at 146.05 92.71 0)
@@ -1446,7 +1446,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 7b4077ca-2763-4aa7-9b23-abdc1a2f1ff7)
+		(uuid 4e4f67c9-a9e4-4e42-b4c0-334077718f96)
 		(property "Reference" "C3"
 			(at 146.05 86.36 0)
 			(effects
@@ -1470,12 +1470,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid 9eb6999c-36c0-4f59-9f77-20faba46fd96))
+			(uuid 33f85776-0d58-435e-acd7-db18d279ea59))
 		(pin "2"
-			(uuid 07dd1c09-72b0-4540-9f08-24d46de336ea))
+			(uuid 33859e68-ed91-487b-ad0b-978bdd6d7edf))
 		(instances
 			(project "spine"
-				(path "/f1e69f2c-26b5-4051-8bab-e846f37a3f4f"
+				(path "/d9324822-7d0c-4f2b-a075-0332be481e7a"
 					(reference "C3")
 					(unit 1)))))
 	(label "SENS_PWR"
@@ -1485,7 +1485,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid c23e29ad-a91b-4da4-b5f6-bb36031f9b23))
+		(uuid a6aecf53-cabc-4c4a-ae96-414d70cf860b))
 	(label "BODY"
 		(at 146.05 96.52 270)
 		(fields_autoplaced yes)
@@ -1493,7 +1493,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid dfb581ab-0c51-4d3d-af69-073d8a6a4e04))
+		(uuid 65c829da-7131-4d03-a936-794b1eeb4ae8))
 	(text "NTC (leaded bead, hand-soldered, in shelf pocket behind LED)"
 		(exclude_from_sim no)
 		(at 25.40 126.52 0)
@@ -1502,7 +1502,7 @@
 				(size 2 2)
 				bold)
 			(justify left bottom))
-		(uuid e00adb9e-a5e1-40f6-8148-29859469b74a))
+		(uuid 1c253e80-efaf-4aa1-90fa-ba35e8647273))
 	(symbol
 		(lib_id "Device:Thermistor_NTC")
 		(at 30.48 143.51 0)
@@ -1511,7 +1511,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 3c3cb9f3-0908-4c67-8ab9-7b634bb94ee1)
+		(uuid 09d81f3e-595d-4eeb-9315-2d4fafc8e551)
 		(property "Reference" "TH1"
 			(at 30.48 137.16 0)
 			(effects
@@ -1541,12 +1541,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid 105821c7-ee9f-4db2-8213-71040232a66a))
+			(uuid 58338c38-1bd4-4e05-9a0a-55481fe9de14))
 		(pin "2"
-			(uuid 3beacbc9-dbd4-465c-9456-feaf0a4885c3))
+			(uuid 2fc3b668-3f72-4f8f-8783-95bc5dec8b8f))
 		(instances
 			(project "spine"
-				(path "/f1e69f2c-26b5-4051-8bab-e846f37a3f4f"
+				(path "/d9324822-7d0c-4f2b-a075-0332be481e7a"
 					(reference "TH1")
 					(unit 1)))))
 	(label "NTC_SIG"
@@ -1556,7 +1556,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 9476ab2c-2a09-4113-840d-fd2ec89d0792))
+		(uuid ddfb751f-94f0-4aad-94f2-30b6d43ac9cd))
 	(label "BODY"
 		(at 30.48 147.32 270)
 		(fields_autoplaced yes)
@@ -1564,7 +1564,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 4317937c-12ce-40c0-acd0-6d1060e54111))
+		(uuid 9eb7e351-5cc1-437a-a7cb-2e094fad1aeb))
 	(sheet_instances
 		(path "/"
 			(page "1"))))

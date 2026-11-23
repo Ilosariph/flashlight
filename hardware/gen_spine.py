@@ -6,7 +6,7 @@ s = kisch.Sheet("spine", "Flashlight spine (ring sensors)", paper="A4")
 s.group("Joint to driver")
 s.part("Connector_Generic:Conn_01x05", "J1", "driver joint", {
     "1": "SENS_PWR", "2": "SDA", "3": "SCL", "4": "NTC_SIG", "5": "BODY"},
-    "Connector_PinHeader_1.27mm:PinHeader_1x05_P1.27mm_Vertical")
+    "flashlight:SpineJoint_1x05_P1.5_SpineEdge")
 s.pwr_flag("SENS_PWR")
 s.pwr_flag("BODY")
 C(s, "C1", "1u", "SENS_PWR", "BODY")

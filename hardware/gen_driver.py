@@ -9,9 +9,9 @@ s.group("Power entry (head spring = CELL+ raw, outer ring = BODY)")
 TP(s, "TP1", "CELLP_RAW", "head spring")
 TP(s, "TP2", "BODY", "body ring")
 s.part("Transistor_FET:SiS415DNT", "Q4", "AON7407", {"D": "CELLP_RAW", "S": "VDD", "G": "Q4_G"},
-       "Package_SO:Vishay_PowerPAK_1212-8_Single",
+       "Package_SON:Diodes_PowerDI3333-8",
        {"LCSC": "C176756", "Note": "reverse-polarity block, P-ch -20 V, <9.5 mOhm @ -4.5 V, Vgs ±8 V; "
-        "SSSG/DDDD like PowerPAK 1212, check AOS DFN3x3 land pattern at layout"})
+        "AOS DFN3x3 EP, SSSG/DDDD; PowerDI3333 land, check vs AOS outline"})
 R(s, "R1", "10k", "Q4_G", "BODY")
 s.part("Device:Polyfuse", "F1", "0.75A hold", {"1": "BODY", "2": "F1_D1"}, "Fuse:Fuse_1206_3216Metric",
        {"MPN": "SMD1206P075TF", "LCSC": "C20987", "Note": "trips on reversed cell + clicky on"})
@@ -65,7 +65,7 @@ R(s, "R4", "1k", "OUT_A", "GATE_A")
 R(s, "R5", "100k", "GATE_A", "BODY")
 s.part("Transistor_FET:DMN3008SFG", "Q1", "AON7400A", {"D": "LED_K", "G": "GATE_A", "S": "SENSE_A"},
        "", {"LCSC": "C85734", "Note": "linear pass FET, up to ~1.8 W, needs copper + thermal path to shelf; "
-            "Vgs(th) 1.97 typ / 2.5 max, SSSG/DDDD like PowerDI3333, check AOS DFN3x3 land pattern at layout"})
+            "Vgs(th) 1.97 typ / 2.5 max, AOS DFN3x3 EP, SSSG/DDDD; PowerDI3333 land, check vs AOS outline"})
 R(s, "R6", "0.05", "SENSE_A", "BODY", R1206, Note="1 %, ≥0.5 W")
 R(s, "R7", "10k", "SENSE_A", "FB_A")
 C(s, "C5", "10n", "FB_A", "OUT_A")
@@ -87,7 +87,7 @@ R(s, "R14", "10k", "NTC_PWR", "NTC_SIG", Note="1 %")
 C(s, "C7", "100n", "NTC_SIG", "BODY")
 s.part("Connector_Generic:Conn_01x05", "J1", "spine joint", {
     "1": "SENS_PWR", "2": "SDA", "3": "SCL", "4": "NTC_SIG", "5": "BODY"},
-    "Connector_PinHeader_1.27mm:PinHeader_1x05_P1.27mm_Vertical",
-    {"Note": "right-angle solder joint to spine PCB (pads, footprint TBD)"})
+    "flashlight:SpineJoint_1x05_P1.5_Driver",
+    {"Note": "90 deg solder joint to spine PCB; 2 anchor pads = pin 5 (BODY)"})
 
 s.save("driver/driver.kicad_sch")

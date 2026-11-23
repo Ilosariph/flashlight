@@ -1,7 +1,8 @@
-"""Regenerate all schematics, run ERC, export PDFs."""
+"""Regenerate project footprints + all schematics, run ERC, export PDFs."""
 import subprocess
 import sys
 
+subprocess.run([sys.executable, "gen_footprints.py"], check=True)
 ok = True
 for b in ("driver", "spine", "tail"):
     subprocess.run([sys.executable, f"gen_{b}.py"], check=True)

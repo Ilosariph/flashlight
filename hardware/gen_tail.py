@@ -14,8 +14,8 @@ s.pwr_flag("CELLN")
 s.group("USB-C (power only) + charger. Click OFF to charge: BAT → BODY → head D1 → CELL+")
 s.part("Connector:USB_C_Receptacle_PowerOnly_6P", "J1", "TE 2495702-1", {
     "VBUS": "VBUS", "GND": "CELLN", "CC1": "CC1", "CC2": "CC2", "SHIELD": "CELLN"},
-    "Connector_USB:USB_C_Receptacle_GCT_USB4125-xx-x_6P_TopMnt_Horizontal",
-    {"Note": "IPX7 TE 2495702-1, footprint TBD (placeholder)"})
+    "flashlight:USB_C_TE_2495702-1",
+    {"MPN": "TE 2495702-1", "Note": "IPX7, overhangs PCB edge; PCB 1.0-1.2 mm"})
 s.pwr_flag("VBUS")
 R(s, "R1", "5.1k", "CC1", "CELLN")
 R(s, "R2", "5.1k", "CC2", "CELLN")
