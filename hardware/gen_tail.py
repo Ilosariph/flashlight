@@ -23,7 +23,7 @@ C(s, "C1", "10u", "VBUS", "CELLN", C0603)
 s.part("Battery_Management:TP4057", "U1", "TP4057", {
     "V_{CC}": "VBUS", "GND": "CELLN", "BAT": "BODY", "PROG": "PROG",
     "~{CHRG}": "CHRG", "STDBY": "STDBY"}, SOT236, {"LCSC": "C12044"})
-R(s, "R3", "2.7k", "PROG", "CELLN", Note="Ibat ≈ 1000/R(kΩ)·… → ~400 mA, check TP4057 datasheet")
+R(s, "R3", "2.7k", "PROG", "CELLN", Note="TP4057: Ibat = 1000 V / R_PROG → 370 mA")
 C(s, "C2", "10u", "BODY", "CELLN", C0603)
 
 s.group("Charge indicator (optional, may glow through the port opening)")

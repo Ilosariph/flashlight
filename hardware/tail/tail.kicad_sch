@@ -2,7 +2,7 @@
 	(version 20231120)
 	(generator "flashlight_kisch")
 	(generator_version "1.0")
-	(uuid f27cace2-c178-4ed5-93d2-3c26c66b470a)
+	(uuid 17046338-c2c7-464f-82fe-66cf1961faca)
 	(paper "A4")
 	(title_block
 		(title "Flashlight tail (charger + clicky)")
@@ -1131,7 +1131,7 @@
 				(size 2 2)
 				bold)
 			(justify left bottom))
-		(uuid b87fef48-76df-4e53-8c35-cb4d3d94f156))
+		(uuid f283d080-0e07-4c80-ba3d-27e1631a0e97))
 	(symbol
 		(lib_id "Connector:TestPoint")
 		(at 30.48 43.18 0)
@@ -1140,7 +1140,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 1f00f0f1-e69c-414e-b5b6-d1be0ec2b174)
+		(uuid 262c5e2a-6d2a-45c3-9e2b-6567dbc07d97)
 		(property "Reference" "TP1"
 			(at 30.48 40.64 0)
 			(effects
@@ -1164,10 +1164,10 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid f574fa52-e102-429a-b9ac-e56c94030480))
+			(uuid 830610ce-de5b-44e9-bf7e-a8b52c41a0a9))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "TP1")
 					(unit 1)))))
 	(label "CELLN"
@@ -1177,7 +1177,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid db722e88-484f-4d11-beb0-807a04980a67))
+		(uuid 2f91b93e-14e3-41c0-b33f-d5a8a66752f2))
 	(symbol
 		(lib_id "Connector:TestPoint")
 		(at 53.34 43.18 0)
@@ -1186,7 +1186,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid ae4510fd-1743-4fae-8486-c530789694f0)
+		(uuid 01408263-a5e7-4b95-aa60-df7df9f0de02)
 		(property "Reference" "TP2"
 			(at 53.34 40.64 0)
 			(effects
@@ -1210,10 +1210,10 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid 8f14bff6-6f68-4d34-a186-5543638938a0))
+			(uuid 5901baa0-0f64-4351-aff4-786a4cbeda49))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "TP2")
 					(unit 1)))))
 	(label "BODY"
@@ -1223,7 +1223,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 37d2a213-34d8-4953-bf50-75166a7764ff))
+		(uuid 53991772-f122-457e-b254-c4fdeda18c7b))
 	(symbol
 		(lib_id "Switch:SW_Push")
 		(at 86.36 43.18 0)
@@ -1232,7 +1232,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 38c8ae86-762c-45eb-bd4d-2744b8c56aad)
+		(uuid 2ab38c30-a236-414a-a1f2-77237f7b1421)
 		(property "Reference" "SW1"
 			(at 86.36 40.64 0)
 			(effects
@@ -1262,12 +1262,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid 29602fe8-4b0f-4f0b-9d1e-0b300b211a19))
+			(uuid 6c7d5433-653b-42ef-93f3-3ac9a82d3b78))
 		(pin "2"
-			(uuid 15e6667e-173a-4afc-a00c-23b47b60e4b1))
+			(uuid 392fc996-f5af-4511-bc1e-ef80d875a9b6))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "SW1")
 					(unit 1)))))
 	(label "CELLN"
@@ -1277,7 +1277,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 1f6b58fe-62b1-4aca-973f-84a4c1fe16e1))
+		(uuid 979cfa3c-545c-4565-bbcf-d89d0093dad0))
 	(label "BODY"
 		(at 91.44 43.18 0)
 		(fields_autoplaced yes)
@@ -1285,7 +1285,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 52bee254-f567-405d-9ec0-95adadceb811))
+		(uuid cb89da18-02d2-4bad-a7bb-342fa9c3b9a0))
 	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 118.11 43.18 0)
@@ -1294,7 +1294,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 962f13e7-0617-477b-941c-460822215edc)
+		(uuid 37681816-3a97-430f-8908-37977fae87ff)
 		(property "Reference" "#FLG01"
 			(at 118.11 40.64 0)
 			(effects
@@ -1318,10 +1318,10 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid 1ead3532-4ee4-4e92-ad76-234c7ad91fbd))
+			(uuid af040da6-1aaa-4ba6-be5c-488b86cde45f))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "#FLG01")
 					(unit 1)))))
 	(label "CELLN"
@@ -1331,7 +1331,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 469941c2-be78-40a3-9175-145e0ebc7ad4))
+		(uuid 42af54b9-00c4-4ae2-bd90-41cbdfcff287))
 	(text "USB-C (power only) + charger. Click OFF to charge: BAT → BODY → head D1 → CELL+"
 		(exclude_from_sim no)
 		(at 25.40 65.80 0)
@@ -1340,7 +1340,7 @@
 				(size 2 2)
 				bold)
 			(justify left bottom))
-		(uuid 4c7067ed-4b62-486c-9482-dd34659e5483))
+		(uuid 5ba77b03-d550-498e-aac9-4ba1c410edfc))
 	(symbol
 		(lib_id "Connector:USB_C_Receptacle_PowerOnly_6P")
 		(at 38.10 86.36 0)
@@ -1349,7 +1349,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 8fb767f7-1ee4-4f10-acd5-76f368861223)
+		(uuid 247247e4-9713-4de7-8a9c-0ea6803dd859)
 		(property "Reference" "J1"
 			(at 38.10 76.20 0)
 			(effects
@@ -1379,22 +1379,22 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "A5"
-			(uuid 15ec06a7-860d-4620-a972-a837b0e62cb4))
+			(uuid f3d94796-1e3e-427e-a570-5e93a96bade3))
 		(pin "A9"
-			(uuid d62ea1e0-d2d8-44f1-bf1e-8992dd899e1d))
+			(uuid 2103a527-86a7-4e71-82d2-8cb0b9db3cfb))
 		(pin "A12"
-			(uuid ddfd6cbd-1ee4-42fb-8fbe-b4c7ff595579))
+			(uuid 8fa06c30-17ac-47cf-853c-ea2437bfc831))
 		(pin "B5"
-			(uuid c35bece1-dc8b-4b69-b6c1-0077c9507ee4))
+			(uuid 453bc438-3938-4e95-9e17-e097c1a97679))
 		(pin "B9"
-			(uuid c991123a-b42b-4db2-824b-4c3a4d734386))
+			(uuid e86e9cc1-a995-41f6-b73a-5312bff89fab))
 		(pin "B12"
-			(uuid 64173e4b-9008-4af0-8ea1-bfbdcf316632))
+			(uuid 969d591b-6837-427c-8b04-405c5f6f7f05))
 		(pin "SH"
-			(uuid 2ab46b57-4ef3-41c0-a941-7155ac1832ad))
+			(uuid ee559b20-df44-4924-9f95-a338621930c9))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "J1")
 					(unit 1)))))
 	(label "CC1"
@@ -1404,7 +1404,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 8c667143-5109-44e5-9ee2-2a114d23f3af))
+		(uuid 6ec8c6c1-1611-4322-bb09-38e59a3bddf8))
 	(label "VBUS"
 		(at 53.34 78.74 0)
 		(fields_autoplaced yes)
@@ -1412,7 +1412,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid b431198a-6289-471b-b637-0d79a7075bb3))
+		(uuid d4b78fa9-58ee-417a-a9d6-9c8736040cd4))
 	(label "CELLN"
 		(at 38.10 104.14 270)
 		(fields_autoplaced yes)
@@ -1420,7 +1420,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 3c9fa740-a9bd-4a33-8fbb-f0e016c5eecd))
+		(uuid cfbda327-3cc7-45fd-a7dc-b3c4bd1c2e96))
 	(label "CC2"
 		(at 53.34 93.98 0)
 		(fields_autoplaced yes)
@@ -1428,7 +1428,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 91b988b9-6b09-4362-9349-f4970c0e5b87))
+		(uuid 51399fef-9fb7-4d48-88ce-75a858a69ca5))
 	(label "VBUS"
 		(at 53.34 78.74 0)
 		(fields_autoplaced yes)
@@ -1436,7 +1436,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid a2fb2cfc-d048-4229-8c92-0fe2c0b6984f))
+		(uuid c9e37bc5-b488-4374-a82f-59d23f43e12c))
 	(label "CELLN"
 		(at 38.10 104.14 270)
 		(fields_autoplaced yes)
@@ -1444,7 +1444,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 732f90da-494f-457f-8897-587e3bb8d45e))
+		(uuid 3de0952d-a9e9-40a2-9efc-4a725e8e3c1f))
 	(label "CELLN"
 		(at 30.48 104.14 270)
 		(fields_autoplaced yes)
@@ -1452,7 +1452,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 470fd7e5-cb23-4647-98a3-c8ab8346c996))
+		(uuid 2b53f342-147e-4534-a501-bd6bf94a18e8))
 	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 80.01 78.74 0)
@@ -1461,7 +1461,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 8665b546-f534-451c-8714-916828b55a16)
+		(uuid d0a33ad8-6546-4bb3-8ad0-7478f7db950e)
 		(property "Reference" "#FLG02"
 			(at 80.01 76.20 0)
 			(effects
@@ -1485,10 +1485,10 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid 084ce45e-7e09-41dd-b500-8c751923222a))
+			(uuid 14a4ad8b-3240-40ef-b6be-b8ae8e5491d7))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "#FLG02")
 					(unit 1)))))
 	(label "VBUS"
@@ -1498,7 +1498,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 556e4f51-3253-40b3-8184-31c2925a61c2))
+		(uuid 71d97bff-fb59-49d4-bae2-411c6970381a))
 	(symbol
 		(lib_id "Device:R")
 		(at 102.87 82.55 0)
@@ -1507,7 +1507,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid d66ac7ac-002c-4aa4-95d9-cce390f433ac)
+		(uuid c1053cf9-9667-4515-93b1-b5e5a6261565)
 		(property "Reference" "R1"
 			(at 102.87 76.20 0)
 			(effects
@@ -1531,12 +1531,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid 7f99248b-4e0d-4f1f-bd6f-96699784eb44))
+			(uuid 4f54ac54-c1c4-4259-bcc1-2710ec0041fa))
 		(pin "2"
-			(uuid 5e5f7df8-2ed6-47b4-809f-fe0f2af4e92e))
+			(uuid cbaa0cc8-74f7-4ec0-a157-a6cf87c58f24))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "R1")
 					(unit 1)))))
 	(label "CC1"
@@ -1546,7 +1546,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 8f638538-ccae-497d-9ddb-5039effbdf55))
+		(uuid 22a012cb-6c57-498f-a826-44f41860ed31))
 	(label "CELLN"
 		(at 102.87 86.36 270)
 		(fields_autoplaced yes)
@@ -1554,7 +1554,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 4f0b5f50-ec04-4279-bb03-2de0d8e2e04e))
+		(uuid 3ceef46c-2bfa-4535-8aa9-2f307711f12e))
 	(symbol
 		(lib_id "Device:R")
 		(at 125.73 82.55 0)
@@ -1563,7 +1563,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 001be05c-68dc-4871-a4bb-507b0e9767bd)
+		(uuid c4898108-20af-4c03-a216-c65bb7b06167)
 		(property "Reference" "R2"
 			(at 125.73 76.20 0)
 			(effects
@@ -1587,12 +1587,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid 0ff6f808-1669-4619-8c0d-39fc8df917ce))
+			(uuid c9f3c807-12bb-47b3-9cc4-8bd60c729fcc))
 		(pin "2"
-			(uuid d667fb67-8934-4fd6-88f9-a1def46cc18d))
+			(uuid b87a0577-f6a4-473f-b94e-fa96d1241cd7))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "R2")
 					(unit 1)))))
 	(label "CC2"
@@ -1602,7 +1602,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 9b656c7e-2b7e-4d75-970b-049bbd47a973))
+		(uuid b7bb2ef6-45dd-4294-a0ba-bed9f45362ac))
 	(label "CELLN"
 		(at 125.73 86.36 270)
 		(fields_autoplaced yes)
@@ -1610,7 +1610,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 4375d08e-a4c6-4ee4-abcb-5dbefca4200a))
+		(uuid 3e6e9c89-eea6-4048-a0b4-ce7bc5c86f63))
 	(symbol
 		(lib_id "Device:C")
 		(at 148.59 82.55 0)
@@ -1619,7 +1619,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 00544495-78e7-44f0-8fd4-095c3bf3c625)
+		(uuid f97c8ce4-645e-4f19-80b1-607b82ccede2)
 		(property "Reference" "C1"
 			(at 148.59 76.20 0)
 			(effects
@@ -1643,12 +1643,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid f2023f4b-40b3-4cbd-b31a-f175ee7ea522))
+			(uuid 13e69185-8e84-4795-aefa-1109d033cbf8))
 		(pin "2"
-			(uuid 5c1c9f81-c8bc-4f53-8bbc-0d47991d6b4b))
+			(uuid 41545a5c-ddfd-4d77-9b54-700c1d280bb6))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "C1")
 					(unit 1)))))
 	(label "VBUS"
@@ -1658,7 +1658,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid a6ce3bbd-47e6-4a1b-b3f6-40c8cf73c52d))
+		(uuid 88be1cb4-8077-43e8-9128-2f2dd2dd5ced))
 	(label "CELLN"
 		(at 148.59 86.36 270)
 		(fields_autoplaced yes)
@@ -1666,7 +1666,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid ee074069-c378-4911-9fbb-d5d2b168bc5c))
+		(uuid 6403e328-fde3-49bb-8eaa-b263e618cf68))
 	(symbol
 		(lib_id "Battery_Management:TP4057")
 		(at 186.69 86.36 0)
@@ -1675,7 +1675,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid 12d8acc6-8d85-4f3d-b7a4-fc839fc511ca)
+		(uuid 1f3d2fb2-4014-42a9-aad3-1c5bfd56fada)
 		(property "Reference" "U1"
 			(at 186.69 76.20 0)
 			(effects
@@ -1705,20 +1705,20 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid 3a9d74fc-42b6-41cf-9651-c2fa27d8cdf1))
+			(uuid 3df0d5d7-77e7-4cda-8eec-2bb4a372d528))
 		(pin "2"
-			(uuid b42efaf4-1075-45f7-bf74-a88d7ef026ee))
+			(uuid b6c4f87b-3fb9-4c22-8e8d-c3a4c123cac2))
 		(pin "3"
-			(uuid c7effe33-9b0c-49e4-b078-31f62b2ab56f))
+			(uuid 8fe85ee4-a4d1-4f60-ad34-d0fa8258c9e1))
 		(pin "4"
-			(uuid c6ec0c73-9c41-4112-886d-23c3b525d288))
+			(uuid 96e8d758-4c23-4869-88c9-2266edb8b473))
 		(pin "5"
-			(uuid 912e8a9a-6865-4c52-9452-cfaadce304f9))
+			(uuid 00648487-dded-4227-94f1-e75eab8d06e9))
 		(pin "6"
-			(uuid da1be751-575c-4dff-bb31-9e92d7b53b31))
+			(uuid c7a1ed2e-afdb-42b8-986b-e43d1840e30a))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "U1")
 					(unit 1)))))
 	(label "CHRG"
@@ -1728,7 +1728,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid acdac7b2-2165-49bf-b824-5c3fedbf9c14))
+		(uuid 9bab9017-d5b3-4f75-b1c0-290b43ecd817))
 	(label "CELLN"
 		(at 186.69 93.98 270)
 		(fields_autoplaced yes)
@@ -1736,7 +1736,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid ea6b01f8-de30-41e5-8fe9-2fb9d0ef42db))
+		(uuid f579faab-dd82-408a-a005-03429bfecdc2))
 	(label "BODY"
 		(at 196.85 83.82 0)
 		(fields_autoplaced yes)
@@ -1744,7 +1744,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 1f9b8786-2bb7-44eb-b352-3464ac00e656))
+		(uuid 8ac8e300-b9b8-463b-84f1-e0e20d2504a0))
 	(label "VBUS"
 		(at 186.69 78.74 90)
 		(fields_autoplaced yes)
@@ -1752,7 +1752,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid b46886e9-4ac4-45c8-b3e6-d6bc61b04193))
+		(uuid 40106adb-05eb-4c46-af8a-b4893649e3dc))
 	(label "STDBY"
 		(at 176.53 88.90 180)
 		(fields_autoplaced yes)
@@ -1760,7 +1760,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid c40eb4ca-eff9-4679-9c40-689b7f759322))
+		(uuid a0388f2e-e607-4758-86d1-6b8da0d20c47))
 	(label "PROG"
 		(at 196.85 88.90 0)
 		(fields_autoplaced yes)
@@ -1768,7 +1768,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 88d49fae-5c2c-4176-913b-f3fc47e078dc))
+		(uuid a2915cfe-683f-4950-b2d1-98df1f88e208))
 	(symbol
 		(lib_id "Device:R")
 		(at 224.79 82.55 0)
@@ -1777,7 +1777,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid a8826147-6480-48ec-bd59-047a94cd8031)
+		(uuid 9ac59f02-c3de-4355-9417-5f075bc5d03f)
 		(property "Reference" "R3"
 			(at 224.79 76.20 0)
 			(effects
@@ -1800,19 +1800,19 @@
 				(font
 					(size 1.27 1.27))
 				(hide yes)))
-		(property "Note" "Ibat ≈ 1000/R(kΩ)·… → ~400 mA, check TP4057 datasheet"
+		(property "Note" "TP4057: Ibat = 1000 V / R_PROG → 370 mA"
 			(at 224.79 100.33 0)
 			(effects
 				(font
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid 0eafafb6-f400-4967-b4f2-702cad8c0621))
+			(uuid 1a5925de-4f62-463c-a89e-a31cfb45f850))
 		(pin "2"
-			(uuid 044afc56-f2f8-4be0-ae26-871c641f2805))
+			(uuid c34aff5d-fed7-4258-92b4-622375739324))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "R3")
 					(unit 1)))))
 	(label "PROG"
@@ -1822,7 +1822,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 6fbe5995-a34d-4e4a-bcbe-a87aa8a61187))
+		(uuid a8d993d9-7e06-437a-86c7-335620cd246c))
 	(label "CELLN"
 		(at 224.79 86.36 270)
 		(fields_autoplaced yes)
@@ -1830,7 +1830,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid a21b08c0-f846-47fd-8b08-1b864fa36a39))
+		(uuid c1450ab2-3867-45dd-a359-c8d9dcdb1c88))
 	(symbol
 		(lib_id "Device:C")
 		(at 246.38 82.55 0)
@@ -1839,7 +1839,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid ba03306c-fac6-4aa2-88f8-20238604b548)
+		(uuid 0a28bc08-667c-4cf0-8628-75787e578977)
 		(property "Reference" "C2"
 			(at 246.38 76.20 0)
 			(effects
@@ -1863,12 +1863,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid caa81715-01f3-4796-b21e-2cf32e5002db))
+			(uuid f375c2f3-ed93-421a-a5c1-c94714c8c3f5))
 		(pin "2"
-			(uuid 30c09ee6-ada8-4d08-bc04-383b2ac224d4))
+			(uuid 4ecc803e-6e59-4cc9-8524-0fdd1c4e0316))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "C2")
 					(unit 1)))))
 	(label "BODY"
@@ -1878,7 +1878,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid d4c2363a-505b-4d23-af3e-d60bb4887e69))
+		(uuid efb47b19-525f-402f-ad0e-026c40336e22))
 	(label "CELLN"
 		(at 246.38 86.36 270)
 		(fields_autoplaced yes)
@@ -1886,7 +1886,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 93398220-ba74-4157-a82b-d7ed26d94bc4))
+		(uuid 1e0a504d-6e9d-4c18-bf52-f6fa3c8116a7))
 	(text "Charge indicator (optional, may glow through the port opening)"
 		(exclude_from_sim no)
 		(at 25.40 126.52 0)
@@ -1895,7 +1895,7 @@
 				(size 2 2)
 				bold)
 			(justify left bottom))
-		(uuid 3e351353-8761-482f-93cb-14221c57f60a))
+		(uuid 2e52aaba-641a-4208-8d8b-d84aed1af175))
 	(symbol
 		(lib_id "Device:R")
 		(at 30.48 143.51 0)
@@ -1904,7 +1904,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid f9f55af1-97b7-4d35-91b1-19a0d99544da)
+		(uuid 57996427-a62d-4b9a-bfa7-358bc58da42c)
 		(property "Reference" "R4"
 			(at 30.48 137.16 0)
 			(effects
@@ -1928,12 +1928,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid 057cf434-5963-40be-b63f-d63f114a0ed3))
+			(uuid 91552c19-7e6a-4e62-9e83-17b6aa1b38a9))
 		(pin "2"
-			(uuid f261ba0a-419e-4de7-95ef-e70ae4b09a28))
+			(uuid d0b95707-c0af-4c3b-8c6c-00300ea0c7b5))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "R4")
 					(unit 1)))))
 	(label "VBUS"
@@ -1943,7 +1943,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 39dfe9f6-3971-4118-99b2-ee5196aa5dec))
+		(uuid d759c7cd-71a1-4917-be84-70c47ac8d365))
 	(label "LED_R"
 		(at 30.48 147.32 270)
 		(fields_autoplaced yes)
@@ -1951,7 +1951,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 7afab0d7-2c84-4e8c-87ca-607e938daff2))
+		(uuid 10fc26bd-193e-44ff-a911-d129e9c1c18b))
 	(symbol
 		(lib_id "Device:LED")
 		(at 60.96 139.70 0)
@@ -1960,7 +1960,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp yes)
-		(uuid 81e5c52a-0858-4d99-9baa-e468074d99a5)
+		(uuid 58b96192-033a-48fd-8ff8-2956758852dd)
 		(property "Reference" "D1"
 			(at 60.96 137.16 0)
 			(effects
@@ -1984,12 +1984,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid 0a2533a4-483a-4e78-bb46-8ade9fd85a0f))
+			(uuid f23af727-5643-413d-b7a0-b64ad2ce8a01))
 		(pin "2"
-			(uuid e2b8be51-5a86-4be8-af53-6e73fa17a682))
+			(uuid 4ee902fa-9f51-4961-8336-32fc76c78baf))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "D1")
 					(unit 1)))))
 	(label "CHRG"
@@ -1999,7 +1999,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 6795ed5b-3347-4d56-ba94-3142e9ec0a21))
+		(uuid bec1cbda-72c2-413a-a333-a0d5c995b636))
 	(label "LED_R"
 		(at 64.77 139.70 0)
 		(fields_autoplaced yes)
@@ -2007,7 +2007,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 79306759-9b56-40fe-ba96-eca6b9cf83bd))
+		(uuid a8dfd1e8-9a64-49bf-b1ec-23942ce7917e))
 	(symbol
 		(lib_id "Device:R")
 		(at 93.98 143.51 0)
@@ -2016,7 +2016,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid d9ed2ab9-eda2-4d70-b2f8-e71f8f6cee24)
+		(uuid eb73e0c5-2c9e-461e-af89-766af75e9c04)
 		(property "Reference" "R5"
 			(at 93.98 137.16 0)
 			(effects
@@ -2040,12 +2040,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid af37d90e-3004-4f35-90b9-9f605eb98d0f))
+			(uuid e7f4402a-e31c-42cc-a5d9-072b8f25c529))
 		(pin "2"
-			(uuid bd43c163-fd92-45a1-a05b-c6a266cd7ab5))
+			(uuid 9d5644bd-8ae4-42cf-aec5-3e4339b2fbb7))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "R5")
 					(unit 1)))))
 	(label "VBUS"
@@ -2055,7 +2055,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid ea1aca50-3d22-4a1f-88f7-52a6710cf8ae))
+		(uuid c281ca1e-68e2-4d75-bd62-55f33bc0abb0))
 	(label "LED_G"
 		(at 93.98 147.32 270)
 		(fields_autoplaced yes)
@@ -2063,7 +2063,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid fc2bc364-7cf3-442f-a774-94faeb7b86eb))
+		(uuid 0d7e3f9e-c422-466c-b8e2-901fab514bbe))
 	(symbol
 		(lib_id "Device:LED")
 		(at 125.73 139.70 0)
@@ -2072,7 +2072,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp yes)
-		(uuid afccf501-8765-4d32-841a-ed8073097701)
+		(uuid f1428be5-86e1-40d3-8079-513965ed4d61)
 		(property "Reference" "D2"
 			(at 125.73 137.16 0)
 			(effects
@@ -2096,12 +2096,12 @@
 					(size 1.27 1.27))
 				(hide yes)))
 		(pin "1"
-			(uuid bbff38e1-4758-4fc5-9d46-03e8b74af4d0))
+			(uuid d5ecc91d-85a5-4815-a17b-ea799f84f22e))
 		(pin "2"
-			(uuid 162f16d5-634c-4322-afd0-8f85a4d10bde))
+			(uuid 4560c5ca-3864-4396-89fc-47e3b90695c5))
 		(instances
 			(project "tail"
-				(path "/f27cace2-c178-4ed5-93d2-3c26c66b470a"
+				(path "/17046338-c2c7-464f-82fe-66cf1961faca"
 					(reference "D2")
 					(unit 1)))))
 	(label "STDBY"
@@ -2111,7 +2111,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify right bottom))
-		(uuid 94ae91fe-375d-409c-b99f-4e0f6c39a131))
+		(uuid a5e818e6-97bf-4e9b-a0c1-b5b502a981cc))
 	(label "LED_G"
 		(at 129.54 139.70 0)
 		(fields_autoplaced yes)
@@ -2119,7 +2119,7 @@
 			(font
 				(size 1.27 1.27))
 			(justify left bottom))
-		(uuid 5551a0c9-ff55-4fa3-ae16-1f85a84f3c6f))
+		(uuid b7dcaa40-e9e9-4986-b6b1-cf28f64e948a))
 	(sheet_instances
 		(path "/"
 			(page "1"))))

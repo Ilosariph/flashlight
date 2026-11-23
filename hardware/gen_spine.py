@@ -14,10 +14,10 @@ R(s, "R1", "4.7k", "SDA", "SENS_PWR")
 R(s, "R2", "4.7k", "SCL", "SENS_PWR")
 
 s.group("Ring sensors: U1 under rear ring (level), U2 under front ring (mode)")
-for ref, var, addr, c in (("U1", "TMAG5273A1QDBVR", "0x35", "C2"), ("U2", "TMAG5273C1QDBVR", "0x78", "C3")):
+for ref, var, addr, c, lcsc in (("U1", "TMAG5273A1QDBVR", "0x35", "C2", "C3716049"), ("U2", "TMAG5273C1QDBVR", "0x78", "C3", "C32969674")):
     s.part("Sensor_Magnetic:TMAG5273x1QDBV", ref, var, {
         "VCC": "SENS_PWR", "GND": "BODY", "TEST": "BODY", "SDA": "SDA", "SCL": "SCL",
-        "~{INT}": None}, SOT236, {"Note": f"I2C {addr}, ±40/80 mT"})
+        "~{INT}": None}, SOT236, {"LCSC": lcsc, "Note": f"I2C {addr}, ±40/80 mT"})
     C(s, c, "100n", "SENS_PWR", "BODY")
 
 s.group("NTC (leaded bead, hand-soldered, in shelf pocket behind LED)")
