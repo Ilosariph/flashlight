@@ -67,6 +67,8 @@ measuring), optional charge LEDs (DNP).
 - Power-up order: OPA_PWR on → DAC → release KILL of the wanted channel.
 - Mode change between ranges: set KILL on both, change VREF/DAC, release.
 - Sensors: power SENS_PWR, wait ~1 ms, configure both (A1 0x35, C1 0x78).
+- Turbo below ~3.3 V cell: Q1 gate drive ≈ Vcell → may drop out of regulation
+  (worst-case AON7400A). Accepted (2026-11-24): turbo just gets weaker, no fix.
 
 ## Next
 
