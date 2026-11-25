@@ -17,7 +17,7 @@ s.part("Device:Polyfuse", "F1", "0.75A hold", {"1": "BODY", "2": "F1_D1"}, "Fuse
        {"MPN": "SMD1206P075TF", "LCSC": "C20987", "Note": "trips on reversed cell + clicky on"})
 s.part("Device:D_Schottky", "D1", "PMEG3020EH", {"A": "F1_D1", "K": "CELLP_RAW"}, "Diode_SMD:D_SOD-123F",
        {"MPN": "PMEG3020EH,115", "LCSC": "C167645",
-        "Note": "charge path BODY->CELL+, Vf 380 mV max @ 0.5 A; low LCSC stock, alt PMEG3020EH-FS (check Vf)"})
+        "Note": "charge path BODY->CELL+, Vf 380 mV max @ 0.5 A; low LCSC stock, alt PMEG3020EH-FS (check Vf); DigiKey sub PMEG2020EH-QX (~390 mV max @ 0.5 A)"})
 C(s, "C1", "10u", "VDD", "BODY", C0603)
 C(s, "C2", "100n", "VDD", "BODY")
 s.pwr_flag("CELLP_RAW")

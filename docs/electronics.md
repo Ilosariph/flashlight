@@ -36,7 +36,7 @@ figures from search snapshots, recheck at order time).
 | Q1 | AON7400A (C85734), DFN3x3 EP | DMN3008SFG not at LCSC. Vgs(th) 1.97 typ / 2.5 max, 10.5 mΩ @ 4.5 V, curves to Vgs 3 V; AOS NRND but ~31k stock. ~1.8 W worst case → thermal vias to the shelf side |
 | Q4 | AON7407 (C176756), DFN3x3 EP | SiS415DNT ~no LCSC stock. P-ch 20 V, ≤9.5 mΩ @ 4.5 V, Vgs(th) ≤0.9 V, Vgs ±8 V (reversed cell → +4.2 V OK); ~29k stock |
 | Q5 | AO3400A (C20917) | |
-| D1 | PMEG3020EH,115 (C167645), SOD-123F | Vf 330 typ / 380 mV max @ 0.5 A ✓. LCSC stock only a few → alt FUXINSEMI PMEG3020EH-FS (~5.5k, Vf unchecked) or global sourcing |
+| D1 | PMEG3020EH,115 (C167645), SOD-123F | Vf 330 typ / 380 mV max @ 0.5 A ✓. LCSC stock only a few → alt FUXINSEMI PMEG3020EH-FS (~5.5k, Vf unchecked). DigiKey: 0 stock, 30 wk. **Prototype sub: Nexperia PMEG2020EH-QX** (DigiKey 1727-PMEG2020EH-QXCT-ND, ~3.9k stock, CHF 0.38) — same SOD-123F footprint and family, 20 V (≫ 4.2 V cell / 5 V USB). Datasheet Table 7 (25 °C): Vf 260/290 mV @ 0.1 A, 370/430 mV @ 1 A (typ/max) → **~340 typ / ~390 mV max @ 0.5 A** (log interp., Fig. 1 agrees) ✓ < 0.45 V, on par with the 3020; Vf falls with temperature. IR 15/50 µA @ 5 V (≈1 mA typ at 85 °C) — only matters with clicky ON (D1 reversed across the cell, negligible next to LED current); clicky OFF it is limited by the charger BAT pin |
 | F1 | SMD1206P075TF RUILON (C20987) | hold 0.75 A, trip 1.5 A, 6 V, ~90 mΩ; ~6.6k stock |
 | R6 | 0.05 Ω 1 % 1206 ≥ 0.5 W | |
 | R11 | 4.7 Ω 1 % 0603 | |
